@@ -14,6 +14,7 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
+            scroll-behavior: auto; /* Changed to auto for instant navigation jump */
         }
 
         .custom-scrollbar::-webkit-scrollbar {
@@ -32,11 +33,11 @@
         }
 
         .fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
+            animation: fadeIn 0.3s ease-out forwards;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -89,7 +90,7 @@
                 </div>
                 
                 <div class="p-6 border-t border-slate-100 text-center">
-                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Safe Travels & Happy New Year!</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-slate-300">Safe Travels & Happy New Year!</p>
                 </div>
             </div>
         </aside>
@@ -167,7 +168,6 @@
             const mobileHeaderTitle = document.getElementById('mobile-header-title');
 
             if (currentDay === 0) {
-                // Dashboard
                 mobileHeaderDay.innerText = "Dashboard";
                 mobileHeaderTitle.innerText = "Welcome Home";
                 
@@ -182,21 +182,11 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+                        <div class="grid grid-cols-1 gap-4 md:gap-6">
                             <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center">
                                 <div class="bg-blue-50 text-blue-600 w-14 h-14 rounded-2xl flex items-center justify-center mb-4"><i data-lucide="map-pin"></i></div>
                                 <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Route</h3>
                                 <p class="font-bold text-slate-800">Poland & Slovakia</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center">
-                                <div class="bg-green-50 text-green-600 w-14 h-14 rounded-2xl flex items-center justify-center mb-4"><i data-lucide="car"></i></div>
-                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Transport</h3>
-                                <p class="font-bold text-slate-800">Rental Car</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center">
-                                <div class="bg-orange-50 text-orange-600 w-14 h-14 rounded-2xl flex items-center justify-center mb-4"><i data-lucide="calendar"></i></div>
-                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Duration</h3>
-                                <p class="font-bold text-slate-800">11 Full Days</p>
                             </div>
                         </div>
 
@@ -222,7 +212,6 @@
                     </div>
                 `;
             } else {
-                // Day View
                 const data = ITINERARY_DATA[currentDay - 1];
                 mobileHeaderDay.innerText = `Day ${currentDay} of 11`;
                 mobileHeaderTitle.innerText = data.date;
@@ -336,31 +325,47 @@
             lucide.createIcons();
         }
 
+        /**
+         * Core Navigation Logic
+         * Renders content, resets scroll, and handles sidebar state.
+         */
         function changeDay(day) {
             currentDay = day;
             
-            // Update Navigation UI
+            // 1. Render the content first
+            renderContent();
+            
+            // 2. Immediately jump to the top of the window
+            window.scrollTo(0, 0);
+            
+            // 3. Update active states in the Sidebar UI
+            updateSidebarUI(day);
+
+            // 4. Close mobile menu if open
+            closeSidebar();
+        }
+
+        function updateSidebarUI(day) {
             document.querySelectorAll('.nav-item').forEach(el => {
                 el.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200');
                 el.classList.add('hover:bg-slate-100', 'text-slate-700');
-                el.querySelector('span').classList.remove('bg-white/20');
-                el.querySelector('span').classList.add('bg-slate-100');
+                const span = el.querySelector('span');
+                if (span) {
+                    span.classList.remove('bg-white/20');
+                    span.classList.add('bg-slate-100');
+                }
             });
 
             const activeBtn = day === 0 ? document.getElementById('nav-home') : document.getElementById(`nav-day-${day}`);
-            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200');
-            activeBtn.classList.remove('hover:bg-slate-100', 'text-slate-700');
-            activeBtn.querySelector('span').classList.add('bg-white/20');
-            activeBtn.querySelector('span').classList.remove('bg-slate-100');
-
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Close mobile sidebar
-            closeSidebar();
-
-            // Render content
-            renderContent();
+            if (activeBtn) {
+                activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200');
+                activeBtn.classList.remove('hover:bg-slate-100', 'text-slate-700');
+                const span = activeBtn.querySelector('span');
+                if (span) {
+                    span.classList.add('bg-white/20');
+                    span.classList.remove('bg-slate-100');
+                }
+            }
         }
 
         function openSidebar() {
@@ -380,7 +385,6 @@
             document.getElementById('close-sidebar').addEventListener('click', closeSidebar);
             document.getElementById('sidebar-overlay').addEventListener('click', closeSidebar);
 
-            // Back to Top functionality
             const backToTopBtn = document.getElementById('back-to-top');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 300) {
