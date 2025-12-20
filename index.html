@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poland Tour Guide 25/26</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+
+        .sidebar-transition {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(#3b82f6 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 hidden md:hidden"></div>
+
+    <div class="min-h-screen flex flex-col md:flex-row">
+        
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-full md:w-80 bg-white border-r border-slate-200 shadow-xl md:shadow-none sidebar-transition -translate-x-full md:translate-x-0 md:static">
+            <div class="flex flex-col h-full">
+                <!-- Sidebar Header -->
+                <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-white sticky top-0 z-10">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-blue-600 p-2.5 rounded-xl shadow-lg shadow-blue-200">
+                            <i data-lucide="plane" class="text-white w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h1 class="font-black text-xl tracking-tight text-slate-900 leading-none">Poland 25/26</h1>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Winter Adventure</p>
+                        </div>
+                    </div>
+                    <button id="close-sidebar" class="md:hidden p-3 bg-slate-50 rounded-xl active:bg-slate-200">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                
+                <!-- Navigation Items Container -->
+                <div id="nav-container" class="flex-1 overflow-y-auto p-4 space-y-2 bg-slate-50/50 md:bg-white custom-scrollbar">
+                    <button onclick="changeDay(0)" id="nav-home" class="nav-item w-full flex items-center p-4 rounded-xl transition-all active:scale-[0.98] bg-blue-600 text-white shadow-lg shadow-blue-200">
+                        <span class="w-10 h-10 flex items-center justify-center rounded-full mr-3 text-sm font-bold bg-white/20">
+                            <i data-lucide="home" class="w-5 h-5"></i>
+                        </span>
+                        <div class="text-left">
+                            <p class="text-sm font-bold">Home Dashboard</p>
+                        </div>
+                    </button>
+                    <div class="pt-6 pb-2 px-4 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">11-Day Itinerary</div>
+                    <div id="daily-nav-list" class="space-y-1">
+                        <!-- JS injected days -->
+                    </div>
+                </div>
+                
+                <div class="p-6 border-t border-slate-100 text-center">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Safe Travels & Happy New Year!</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 min-w-0">
+            <!-- Mobile Sticky Header -->
+            <header class="md:hidden sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 h-16 flex items-center justify-between">
+                <button id="open-sidebar" class="p-2.5 bg-slate-100 text-slate-700 rounded-xl active:scale-95 transition-transform">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+                <div class="text-center">
+                    <span id="mobile-header-day" class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">Dashboard</span>
+                    <span id="mobile-header-title" class="font-extrabold text-slate-900 text-sm">Welcome Home</span>
+                </div>
+                <button onclick="changeDay(0)" class="p-2.5 rounded-xl bg-slate-100 text-slate-700 active:scale-95">
+                    <i data-lucide="home" class="w-5.5 h-5.5"></i>
+                </button>
+            </header>
+
+            <div id="content-area" class="p-4 md:p-8 lg:p-12 max-w-6xl mx-auto pb-24">
+                <!-- Content injected via JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-14 h-14 bg-slate-900 text-white rounded-2xl shadow-2xl flex items-center justify-center z-50 transition-all duration-300 transform translate-y-20 opacity-0 active:scale-90">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
+
+    <script>
+        const ITINERARY_DATA = [
+            { day: 1, date: "26th Dec 2025", title: "Arrival in Krakow", location: "Krakow", hotel: "Hotel Vistula", travelTime: "25 mins from airport", notes: "Free parking available; Breakfast is an extra charge.", activities: ["Departure from Malta @ 19:00 (FR7142)", "Arrival at Krakow Airport @ 21:40", "Pick up rental car from airport", "Travel to Hotel Vistula"], highlights: ["First night in Poland", "Rental car collection"] },
+            { day: 2, date: "27th Dec 2025", title: "Salt Mines & Auschwitz", location: "Wieliczka & Oświęcim", hotel: "Hotel Vistula", travelTime: "Mines (30m), Auschwitz (1h 20m)", notes: "Mines booked @ 09:00. Auschwitz booked @ 13:50.", activities: ["Wieliczka Salt Mines (Booked)", "Travel to Oświęcim", "Auschwitz & Birkenau (Booked)", "Optional: Katowice Christmas Market"], highlights: ["UNESCO Salt Mine", "Holocaust Memorial"] },
+            { day: 3, date: "28th Dec 2025", title: "Papal History & Theme Park", location: "Wadowice & Zator", hotel: "Hotel Convictus Cracovia", travelTime: "Wadowice (1h 10m), Zator (30m)", notes: "Energylandia Winter Zone opens at 11:30.", activities: ["Wadowice: Pope John Paul II's Birthplace", "Try local Kremówka (Cream Cake)", "Energylandia Winter Zone", "Check-in at Hotel Convictus"], highlights: ["Papal heritage", "Energylandia Coasters"] },
+            { day: 4, date: "29th Dec 2025", title: "Shopping & Krakow Old Town", location: "Sosnowiec & Krakow", hotel: "Hotel Convictus Cracovia", travelTime: "Krakow to Sosnowiec (1h)", notes: "Krakow Christmas Market is best enjoyed in the evening.", activities: ["Sosnowiec Designer Village (Outlet)", "Wawel Royal Castle & Cathedral", "Main Market Square (Rynek Główny)", "Jewish Quarter exploration"], highlights: ["Designer Shopping", "Royal History"] },
+            { day: 5, date: "30th Dec 2025", title: "Heading to the Mountains", location: "Zakopane", hotel: "Pokoje Goscinne U Moniki", travelTime: "Krakow to Zakopane (1h 30m)", notes: "Meet host for check-in at 14:00.", activities: ["Travel to Zakopane", "Krupówki Street (Shopping & Food)", "Thermal Baths (Chochołowskie Termy)", "Settle into mountain lodge"], highlights: ["Highlander culture", "Thermal springs"] },
+            { day: 6, date: "31st Dec 2025", title: "New Year's Eve on the Peaks", location: "Kasprowy Wierch", hotel: "Pokoje Goscinne U Moniki", travelTime: "Local Zakopane travel", notes: "NYE Dinner is at Stek Chalupa.", activities: ["Kasprowy Wierch Cable Car @ 08:30", "High Tatra summit exploration", "New Year's Eve Dinner at Stek Chalupa", "NYE Celebration in Zakopane"], highlights: ["Mountain Summit", "NYE Dinner"] },
+            { day: 7, date: "1st Jan 2026", title: "New Year's Hike & Views", location: "Tatra National Park", hotel: "Pokoje Goscinne U Moniki", travelTime: "Palenica Parking (30m)", notes: "The walk to Morskie Oko is approx. 2 hours each way.", activities: ["Hike to Morskie Oko (Glacial Lake)", "Optional: Horse-drawn sleigh ride", "Gubałówka Mountain (Funicular)", "Snow tubing & panorama views"], highlights: ["Glacial Lake", "Gubałówka Sunset"] },
+            { day: 8, date: "2nd Jan 2026", title: "Snow Mazes & Slovakia", location: "Zakopane & Slovakia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Zakopane to Slovakia (1h)", notes: "Check-in in Slovakia after 17:00.", activities: ["Snowlandia (Giant Snow Maze)", "Cross border into Slovakia", "Treetop Walk at Bachledova Valley", "Check-in at lake resort"], highlights: ["Snowlandia Maze", "Treetop Walk"] },
+            { day: 9, date: "3rd Jan 2026", title: "High Altitudes & Aquaparks", location: "Lomnicky Peak & Tatralandia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Local Slovakia travel", notes: "Tatralandia is a massive indoor tropical park.", activities: ["Lomnicky Peak (Cable car to 2,634m)", "Tatralandia Tropical Paradise", "Evening wellness and saunas", "Relaxation at the lake resort"], highlights: ["Highest accessible peak", "Tropical Waterpark"] },
+            { day: 10, date: "4th Jan 2026", title: "Ice Sculptures & Return", location: "Hrebienok & Krakow", hotel: "Hyatt Place Krakow", travelTime: "Slovakia to Krakow (2h)", notes: "The Ice Dome is built from 1,800 ice blocks.", activities: ["Tatra Ice Dome (Ice Cathedral)", "Zdiar Strednica (Photo Stop)", "Travel back to Krakow", "Check-in at Hyatt Place Krakow"], highlights: ["Ice Dome Architecture", "Belianske Tatras views"] },
+            { day: 11, date: "5th Jan 2026", title: "Final Walk & Departure", location: "Krakow Airport", hotel: "Check-out", travelTime: "Krakow to Airport (20m)", notes: "Ensure rental car is refuelled before return.", activities: ["Morning walk in Krakow City Centre", "Return rental car at Airport @ 12:30", "Departure Flight @ 15:25"], highlights: ["Souvenir shopping", "Homebound"] }
+        ];
+
+        let currentDay = 0;
+
+        // Initialize App
+        function init() {
+            renderNav();
+            renderContent();
+            lucide.createIcons();
+            setupEventListeners();
+        }
+
+        function renderNav() {
+            const list = document.getElementById('daily-nav-list');
+            list.innerHTML = ITINERARY_DATA.map(item => `
+                <button onclick="changeDay(${item.day})" id="nav-day-${item.day}" class="nav-item w-full flex items-center p-4 rounded-xl transition-all active:scale-[0.98] hover:bg-slate-100 text-slate-700 bg-white md:bg-transparent">
+                    <span class="w-10 h-10 flex items-center justify-center rounded-full mr-3 text-sm font-bold bg-slate-100">
+                        ${item.day}
+                    </span>
+                    <div class="text-left overflow-hidden">
+                        <p class="text-sm font-bold truncate text-slate-900">${item.title}</p>
+                        <p class="text-[10px] uppercase tracking-wider font-semibold text-slate-400">${item.date}</p>
+                    </div>
+                </button>
+            `).join('');
+        }
+
+        function renderContent() {
+            const container = document.getElementById('content-area');
+            const mobileHeaderDay = document.getElementById('mobile-header-day');
+            const mobileHeaderTitle = document.getElementById('mobile-header-title');
+
+            if (currentDay === 0) {
+                // Dashboard
+                mobileHeaderDay.innerText = "Dashboard";
+                mobileHeaderTitle.innerText = "Welcome Home";
+                
+                container.innerHTML = `
+                    <div class="space-y-8 fade-in">
+                        <div class="relative h-64 md:h-80 rounded-[2.5rem] overflow-hidden shadow-2xl flex items-end">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent z-10"></div>
+                            <div class="absolute inset-0 bg-blue-900 -z-10 flex items-center justify-center bg-pattern opacity-20"></div>
+                            <div class="p-8 md:p-12 relative z-20 w-full text-white">
+                                <h2 class="text-4xl md:text-6xl font-black mb-3 tracking-tight leading-none">Merry Christmas & Happy New Year!</h2>
+                                <p class="text-blue-200 text-lg md:text-xl font-medium">26th Dec 2025 — 5th Jan 2026</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+                            <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center">
+                                <div class="bg-blue-50 text-blue-600 w-14 h-14 rounded-2xl flex items-center justify-center mb-4"><i data-lucide="map-pin"></i></div>
+                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Route</h3>
+                                <p class="font-bold text-slate-800">Poland & Slovakia</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center">
+                                <div class="bg-green-50 text-green-600 w-14 h-14 rounded-2xl flex items-center justify-center mb-4"><i data-lucide="car"></i></div>
+                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Transport</h3>
+                                <p class="font-bold text-slate-800">Rental Car</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col items-center text-center">
+                                <div class="bg-orange-50 text-orange-600 w-14 h-14 rounded-2xl flex items-center justify-center mb-4"><i data-lucide="calendar"></i></div>
+                                <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Duration</h3>
+                                <p class="font-bold text-slate-800">11 Full Days</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-black text-slate-900 mb-6">Explore Itinerary</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                ${ITINERARY_DATA.map(item => `
+                                    <button onclick="changeDay(${item.day})" class="group flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100 hover:border-blue-400 hover:shadow-xl transition-all text-left">
+                                        <div class="flex items-center space-x-5">
+                                            <div class="text-2xl font-black text-slate-200 group-hover:text-blue-100 w-10 text-center">${item.day.toString().padStart(2,'0')}</div>
+                                            <div class="min-w-0">
+                                                <p class="font-bold text-slate-800 group-hover:text-blue-700 truncate">${item.title}</p>
+                                                <p class="text-[11px] font-bold text-slate-400 uppercase">${item.date}</p>
+                                            </div>
+                                        </div>
+                                        <div class="w-10 h-10 rounded-full bg-slate-50 group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center transition-all">
+                                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                                        </div>
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Day View
+                const data = ITINERARY_DATA[currentDay - 1];
+                mobileHeaderDay.innerText = `Day ${currentDay} of 11`;
+                mobileHeaderTitle.innerText = data.date;
+
+                container.innerHTML = `
+                    <div class="space-y-6 fade-in">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2 border-b border-slate-200">
+                            <div>
+                                <div class="flex items-center space-x-2 text-blue-600 font-black uppercase tracking-[0.2em] text-[11px]">
+                                    <span class="bg-blue-100 px-2 py-0.5 rounded">Day ${data.day}</span>
+                                    <span class="text-slate-300">•</span>
+                                    <span>${data.date}</span>
+                                </div>
+                                <h2 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-none">${data.title}</h2>
+                                <div class="flex items-center text-slate-500 font-medium pt-1">
+                                    <i data-lucide="map-pin" class="w-4 h-4 mr-1.5 text-red-500"></i>
+                                    ${data.location}
+                                </div>
+                            </div>
+                            <div class="hidden md:flex items-center bg-white p-2 rounded-2xl border border-slate-200 shadow-sm space-x-1">
+                                <button onclick="changeDay(${Math.max(1, currentDay - 1)})" ${currentDay === 1 ? 'disabled' : ''} class="p-3 hover:bg-slate-100 disabled:opacity-20 rounded-xl transition-colors">
+                                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                                </button>
+                                <div class="px-6 flex flex-col items-center">
+                                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Progress</span>
+                                    <span class="font-bold text-slate-900">${currentDay} / 11</span>
+                                </div>
+                                <button onclick="changeDay(${Math.min(11, currentDay + 1)})" ${currentDay === 11 ? 'disabled' : ''} class="p-3 hover:bg-slate-100 disabled:opacity-20 rounded-xl transition-colors">
+                                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-indigo-50 p-3 rounded-2xl text-indigo-600"><i data-lucide="home"></i></div>
+                                    <div>
+                                        <p class="text-[10px] font-black text-slate-400 uppercase">Stay</p>
+                                        <p class="font-bold text-slate-800">${data.hotel}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-orange-50 p-3 rounded-2xl text-orange-600"><i data-lucide="clock"></i></div>
+                                    <div>
+                                        <p class="text-[10px] font-black text-slate-400 uppercase">Est. Travel</p>
+                                        <p class="font-bold text-slate-800">${data.travelTime}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-900 p-6 rounded-3xl shadow-xl lg:col-span-1 sm:col-span-2">
+                                <div class="flex items-center space-x-3 text-blue-400 mb-2">
+                                    <i data-lucide="info" class="w-4 h-4"></i>
+                                    <span class="text-[10px] font-black uppercase tracking-[0.2em]">Note</span>
+                                </div>
+                                <p class="text-white text-sm font-medium leading-relaxed italic">"${data.notes}"</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                            <div class="lg:col-span-8 space-y-6">
+                                <section class="bg-white rounded-[2.5rem] p-6 md:p-10 border border-slate-100 shadow-sm">
+                                    <h3 class="text-2xl font-black text-slate-900 mb-8">Daily Actions</h3>
+                                    <div class="space-y-8 relative">
+                                        <div class="absolute left-[19px] top-2 bottom-2 w-px bg-slate-100 hidden sm:block"></div>
+                                        ${data.activities.map((act, i) => `
+                                            <div class="flex space-x-5 group relative z-10">
+                                                <div class="flex-none w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-sm">${i + 1}</div>
+                                                <div class="pt-1.5"><p class="text-slate-800 font-semibold md:text-lg">${act}</p></div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="lg:col-span-4 space-y-6">
+                                <div class="bg-blue-600 text-white p-8 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                                    <div class="relative z-10">
+                                        <h4 class="text-xl font-black mb-4 uppercase tracking-wider">Highlights</h4>
+                                        <ul class="space-y-4">
+                                            ${data.highlights.map(h => `
+                                                <li class="flex items-center space-x-3">
+                                                    <i data-lucide="star" class="w-5 h-5 text-yellow-300 fill-yellow-300"></i>
+                                                    <span class="font-bold">${h}</span>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm text-center">
+                                    <div class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="map-pin" class="w-8 h-8"></i></div>
+                                    <p class="text-slate-500 text-sm mb-4">Need help getting to ${data.location}?</p>
+                                    <a href="https://www.google.com/maps/search/${encodeURIComponent(data.location)}" target="_blank" class="block w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-sm active:scale-95 transition-all shadow-lg">Open Google Maps</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile Footer Nav -->
+                        <div class="md:hidden flex items-center justify-between pt-8 gap-3">
+                            <button onclick="changeDay(${Math.max(1, currentDay - 1)})" ${currentDay === 1 ? 'disabled' : ''} class="flex-1 py-4 bg-white border border-slate-200 rounded-2xl flex items-center justify-center text-slate-700 font-bold disabled:opacity-30">
+                                <i data-lucide="chevron-left" class="w-5 h-5 mr-2"></i> Prev
+                            </button>
+                            <button onclick="changeDay(${Math.min(11, currentDay + 1)})" ${currentDay === 11 ? 'disabled' : ''} class="flex-1 py-4 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-black disabled:opacity-30 shadow-lg shadow-blue-200">
+                                Next <i data-lucide="chevron-right" class="w-5 h-5 ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            lucide.createIcons();
+        }
+
+        function changeDay(day) {
+            currentDay = day;
+            
+            // Update Navigation UI
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200');
+                el.classList.add('hover:bg-slate-100', 'text-slate-700');
+                el.querySelector('span').classList.remove('bg-white/20');
+                el.querySelector('span').classList.add('bg-slate-100');
+            });
+
+            const activeBtn = day === 0 ? document.getElementById('nav-home') : document.getElementById(`nav-day-${day}`);
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-200');
+            activeBtn.classList.remove('hover:bg-slate-100', 'text-slate-700');
+            activeBtn.querySelector('span').classList.add('bg-white/20');
+            activeBtn.querySelector('span').classList.remove('bg-slate-100');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Close mobile sidebar
+            closeSidebar();
+
+            // Render content
+            renderContent();
+        }
+
+        function openSidebar() {
+            document.getElementById('sidebar').classList.remove('-translate-x-full');
+            document.getElementById('sidebar-overlay').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.add('-translate-x-full');
+            document.getElementById('sidebar-overlay').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function setupEventListeners() {
+            document.getElementById('open-sidebar').addEventListener('click', openSidebar);
+            document.getElementById('close-sidebar').addEventListener('click', closeSidebar);
+            document.getElementById('sidebar-overlay').addEventListener('click', closeSidebar);
+
+            // Back to Top functionality
+            const backToTopBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('translate-y-20', 'opacity-0');
+                    backToTopBtn.classList.add('translate-y-0', 'opacity-100');
+                } else {
+                    backToTopBtn.classList.add('translate-y-20', 'opacity-0');
+                    backToTopBtn.classList.remove('translate-y-0', 'opacity-100');
+                }
+            });
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
