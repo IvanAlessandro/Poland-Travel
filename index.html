@@ -342,9 +342,19 @@
                     </div>
                 ` : '';
 
-                // Extra Detail Buttons (Day 6: NYE, Day 7: Snow Activities)
+                // Extra Detail Buttons (Day 2: Salt Mines, Day 6: NYE, Day 7: Snow Activities)
                 let extraButtonHtml = '';
-                if (currentDay === 6) {
+                if (currentDay === 2) {
+                    extraButtonHtml = `
+                        <div class="mt-6">
+                            <button onclick="viewMedia('pictures', 'doc2', 'pdf')" class="w-full flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
+                                <i data-lucide="ticket" class="w-6 h-6 text-yellow-400 group-hover:animate-pulse"></i>
+                                <span class="text-lg font-black uppercase tracking-wider">Tickets Salt Mines</span>
+                                <i data-lucide="chevron-right" class="w-5 h-5 opacity-40"></i>
+                            </button>
+                        </div>
+                    `;
+                } else if (currentDay === 6) {
                     extraButtonHtml = `
                         <div class="mt-6">
                             <button onclick="viewMedia('pictures', 'doc6', 'pdf')" class="w-full flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
@@ -510,8 +520,15 @@
             // Determine Path and Titles
             if (isPdf) {
                 path = `${folder}/${identifier}.pdf`;
-                title.innerText = identifier === 'doc6' ? "New Year's Eve" : (identifier === 'doc7' ? "Snow Activities" : (identifier === 'info1' ? "Congo Itinerary" : "Travel Guide"));
-                subtitle.innerText = "Trip Document Viewer";
+                const titles = {
+                    'doc2': 'Tickets Salt Mines',
+                    'doc6': "New Year's Eve",
+                    'doc7': 'Snow Activities',
+                    'info1': 'Congo Itinerary',
+                    'info2': 'Travel Guide'
+                };
+                title.innerText = titles[identifier] || "Trip Document Viewer";
+                subtitle.innerText = "Internal Viewer";
                 
                 pdfContent.src = path;
                 pdfContent.classList.remove('hidden');
