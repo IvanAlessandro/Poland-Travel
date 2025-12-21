@@ -51,12 +51,12 @@
             display: none;
             position: fixed;
             inset: 0;
-            background-color: rgba(15, 23, 42, 0.95);
+            background-color: rgba(15, 23, 42, 0.98);
             z-index: 100;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 20px;
         }
 
@@ -66,10 +66,19 @@
 
         #media-content {
             max-width: 100%;
-            max-height: 80vh;
+            max-height: 75vh;
             border-radius: 1rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             object-fit: contain;
+        }
+
+        #pdf-content {
+            width: 100%;
+            height: 75vh;
+            max-width: 1000px;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            background: white;
         }
     </style>
 </head>
@@ -77,16 +86,21 @@
 
     <!-- Media Viewer Modal -->
     <div id="media-viewer">
-        <button onclick="closeMedia()" class="absolute top-6 left-6 flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-2xl transition-all active:scale-95 font-bold">
-            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+        <button onclick="closeMedia()" class="mb-6 flex items-center space-x-2 bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-2xl transition-all active:scale-95 font-bold border border-white/10">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
             <span>Back to Itinerary</span>
         </button>
-        <div class="text-center mb-6">
-            <h3 id="media-title" class="text-white text-2xl font-black tracking-tight">Image View</h3>
-            <p id="media-subtitle" class="text-slate-400 font-bold uppercase tracking-widest text-xs mt-1">Day X</p>
+        <div class="text-center mb-8">
+            <h3 id="media-title" class="text-white text-3xl font-black tracking-tight leading-none">Media View</h3>
+            <p id="media-subtitle" class="text-slate-400 font-bold uppercase tracking-widest text-xs mt-2">Trip Information</p>
         </div>
-        <img id="media-content" src="" alt="Travel Media">
-        <p id="media-error" class="text-red-400 mt-4 font-bold hidden">Image not found in local folder.</p>
+        
+        <div id="viewer-container" class="w-full flex justify-center items-center">
+            <img id="media-content" src="" alt="Travel Media" class="hidden">
+            <iframe id="pdf-content" src="" class="hidden"></iframe>
+        </div>
+
+        <p id="media-error" class="text-red-400 mt-8 font-bold hidden bg-red-400/10 px-6 py-3 rounded-xl border border-red-400/20">File could not be displayed. Please check the local folder.</p>
     </div>
 
     <!-- Mobile Navigation Drawer Overlay -->
@@ -288,21 +302,21 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <a href="pictures/info1.pdf" target="_blank" class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-xl transition-all text-center active:scale-[0.98] group block">
+                            <button onclick="viewMedia('pictures', 'info1', 'pdf')" class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-xl transition-all text-center active:scale-[0.98] group">
                                 <div class="bg-blue-50 text-blue-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                     <i data-lucide="file-text" class="w-10 h-10"></i>
                                 </div>
                                 <h4 class="text-xl font-black text-slate-900">Itinerary by Congo</h4>
-                                <p class="text-slate-500 text-sm mt-2">Open document (PDF)</p>
-                            </a>
+                                <p class="text-slate-500 text-sm mt-2">Tap to view (PDF)</p>
+                            </button>
 
-                            <a href="pictures/info2.pdf" target="_blank" class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-indigo-400 hover:shadow-xl transition-all text-center active:scale-[0.98] group block">
+                            <button onclick="viewMedia('pictures', 'info2', 'pdf')" class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-indigo-400 hover:shadow-xl transition-all text-center active:scale-[0.98] group">
                                 <div class="bg-indigo-50 text-indigo-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                                     <i data-lucide="book-open" class="w-10 h-10"></i>
                                 </div>
                                 <h4 class="text-xl font-black text-slate-900">Guide</h4>
-                                <p class="text-slate-500 text-sm mt-2">Open travel guide (PDF)</p>
-                            </a>
+                                <p class="text-slate-500 text-sm mt-2">Tap to view (PDF)</p>
+                            </button>
 
                             <button class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-emerald-400 hover:shadow-xl transition-all text-center active:scale-[0.98] group">
                                 <div class="bg-emerald-50 text-emerald-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
@@ -331,11 +345,11 @@
                 // Extra NYE Button for Day 6
                 const nyeButtonHtml = currentDay === 6 ? `
                     <div class="mt-6">
-                        <a href="pictures/doc6.pdf" target="_blank" class="flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
+                        <button onclick="viewMedia('pictures', 'doc6', 'pdf')" class="w-full flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
                             <i data-lucide="sparkles" class="w-6 h-6 text-yellow-400 group-hover:animate-pulse"></i>
                             <span class="text-lg font-black uppercase tracking-wider">New Year's Eve Info</span>
-                            <i data-lucide="external-link" class="w-5 h-5 opacity-40"></i>
-                        </a>
+                            <i data-lucide="chevron-right" class="w-5 h-5 opacity-40"></i>
+                        </button>
                     </div>
                 ` : '';
 
@@ -464,44 +478,56 @@
         /**
          * Media Viewer Logic
          */
-        function viewMedia(folder, day) {
+        function viewMedia(folder, identifier, format = 'jpg') {
             const viewer = document.getElementById('media-viewer');
-            const content = document.getElementById('media-content');
+            const imgContent = document.getElementById('media-content');
+            const pdfContent = document.getElementById('pdf-content');
             const title = document.getElementById('media-title');
             const subtitle = document.getElementById('media-subtitle');
             const error = document.getElementById('media-error');
             
             let path;
-            
-            if (folder === 'pictures' && day === 3) {
-                // Day 3 stay override
-                path = 'pictures/hotel3.jpg';
-                title.innerText = 'Accommodation View';
-                subtitle.innerText = `Itinerary Day ${day}`;
-            } else {
-                const prefix = folder === 'pictures' ? 'hotel' : 'map';
-                path = `${folder}/${prefix}${day}.jpg`;
-                title.innerText = folder === 'pictures' ? 'Accommodation View' : 'Route Map';
-                subtitle.innerText = `Itinerary Day ${day}`;
-            }
-            
-            content.src = path;
+            const isPdf = format === 'pdf';
+
+            // Reset UI
+            imgContent.classList.add('hidden');
+            pdfContent.classList.add('hidden');
             error.classList.add('hidden');
-            
-            content.onerror = () => {
-                error.classList.remove('hidden');
-                content.style.display = 'none';
-            };
-            content.onload = () => {
-                content.style.display = 'block';
-            };
+
+            // Determine Path and Titles
+            if (isPdf) {
+                path = `${folder}/${identifier}.pdf`;
+                title.innerText = identifier === 'doc6' ? "New Year's Eve" : (identifier === 'info1' ? "Congo Itinerary" : "Travel Guide");
+                subtitle.innerText = "Trip Document Viewer";
+                
+                pdfContent.src = path;
+                pdfContent.classList.remove('hidden');
+            } else {
+                if (folder === 'pictures' && identifier === 3) {
+                    path = 'pictures/hotel3.jpg';
+                } else {
+                    const prefix = folder === 'pictures' ? 'hotel' : 'map';
+                    path = `${folder}/${prefix}${identifier}.jpg`;
+                }
+                title.innerText = folder === 'pictures' ? 'Accommodation View' : 'Route Map';
+                subtitle.innerText = `Itinerary Day ${identifier}`;
+                
+                imgContent.src = path;
+                imgContent.classList.remove('hidden');
+                imgContent.onerror = () => {
+                    error.classList.remove('hidden');
+                    imgContent.classList.add('hidden');
+                };
+            }
 
             viewer.classList.add('active');
             document.body.style.overflow = 'hidden';
+            lucide.createIcons();
         }
 
         function closeMedia() {
             document.getElementById('media-viewer').classList.remove('active');
+            document.getElementById('pdf-content').src = ""; // Stop PDF from loading in background
             document.body.style.overflow = 'auto';
         }
 
@@ -522,7 +548,7 @@
                 el.classList.add('hover:bg-slate-100', 'text-slate-700');
                 const span = el.querySelector('span');
                 if (span) {
-                    span.classList.remove('bg-white/20');
+                    span.classList.remove('bg-white/20', 'bg-blue-50', 'text-blue-600');
                     span.classList.add('bg-slate-100');
                 }
             });
@@ -534,7 +560,7 @@
                 const span = activeBtn.querySelector('span');
                 if (span) {
                     span.classList.add('bg-white/20');
-                    span.classList.remove('bg-slate-100');
+                    span.classList.remove('bg-slate-100', 'bg-blue-50', 'text-blue-600');
                 }
             }
         }
