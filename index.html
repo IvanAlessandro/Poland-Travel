@@ -166,8 +166,8 @@
         const ITINERARY_DATA = [
             { day: 1, date: "26th Dec 2025", title: "Arrival in Krakow", location: "Krakow", hotel: "Hotel Vistula", travelTime: "25 mins from airport", notes: "Free parking available; Breakfast is an extra charge.", activities: ["Departure from Malta @ 19:00 (FR7142)", "Arrival at Krakow Airport @ 21:40", "Pick up rental car from airport", "Travel to Hotel Vistula"], highlights: ["First night in Poland", "Rental car collection"] },
             { day: 2, date: "27th Dec 2025", title: "Salt Mines & Auschwitz", location: "Wieliczka & Oświęcim", hotel: "Hotel Vistula", travelTime: "Mines (30m), Auschwitz (1h 20m)", notes: "Mines booked @ 09:00. Auschwitz booked @ 13:50.", activities: ["Wieliczka Salt Mines (Booked)", "Travel to Auschwitz (1.2hrs)", "Auschwitz & Birkenau (Booked)", "Optional: Katowice Christmas Market"], highlights: ["UNESCO Salt Mine", "Holocaust Memorial"] },
-            { day: 3, date: "28th Dec 2025", title: "Papal History & Theme Park", location: "Wadowice & Zator", hotel: "Hotel Convictus Cracovia", travelTime: "Wadowice (1h 10m), Zator (30m)", notes: "Energylandia Winter Zone opens at 11:30.", activities: ["Wadowice: Pope John Paul II's Birthplace", "Try local Kremówka (Cream Cake)", "Energylandia Winter Zone", "Check-in at Hotel Convictus"], highlights: ["Papal heritage", "Energylandia Coasters"] },
-            { day: 4, date: "29th Dec 2025", title: "Shopping & Krakow Old Town", location: "Sosnowiec & Krakow", hotel: "Hotel Convictus Cracovia", travelTime: "Krakow to Sosnowiec (1h)", notes: "Krakow Christmas Market is best enjoyed in the evening.", activities: ["Sosnowiec Designer Village (Outlet)", "Wawel Royal Castle & Cathedral", "Main Market Square (Rynek Głünstry)", "Jewish Quarter exploration"], highlights: ["Designer Shopping", "Royal History"] },
+            { day: 3, date: "28th Dec 2025", title: "Papal History & Theme Park", location: "Wadowice & Zator", hotel: "Hotel Convictus Cracovia", travelTime: "Wadowice (1h 10m), Zator (30m)", notes: "Energylandia Winter Zone opens at 11:30.", activities: ["Check-out", "Wadowice: Pope John Paul II's Birthplace", "Try local Kremówka (Cream Cake)", "Energylandia Winter Zone", "Check-in at Hotel Convictus", "Krakow City Evening"], highlights: ["Papal heritage", "Energylandia Coasters"] },
+            { day: 4, date: "29th Dec 2025", title: "Shopping & Krakow Old Town", location: "Sosnowiec & Krakow", hotel: "Hotel Convictus Cracovia", travelTime: "Krakow to Sosnowiec (1h)", notes: "Krakow Christmas Market is best enjoyed in the evening.", activities: ["Sosnowiec Designer Village (Outlet)", "Wawel Royal Castle & Cathedral", "Main Market Square (Rynek Główny)", "Jewish Quarter exploration"], highlights: ["Designer Shopping", "Royal History"] },
             { day: 5, date: "30th Dec 2025", title: "Heading to the Mountains", location: "Zakopane", hotel: "Pokoje Goscinne U Moniki", travelTime: "Krakow to Zakopane (1h 30m)", notes: "Meet host for check-in at 14:00.", activities: ["Travel to Zakopane", "Krupówki Street (Shopping & Food)", "Thermal Baths (Chochołowskie Termy)", "Settle into mountain lodge"], highlights: ["Highlander culture", "Thermal springs"] },
             { day: 6, date: "31st Dec 2025", title: "New Year's Eve on the Peaks", location: "Kasprowy Wierch", hotel: "Pokoje Goscinne U Moniki", travelTime: "Local Zakopane travel", notes: "NYE Dinner is at Stek Chalupa.", activities: ["Kasprowy Wierch Cable Car @ 08:30", "High Tatra summit exploration", "New Year's Eve Dinner at Stek Chalupa", "NYE Celebration in Zakopane"], highlights: ["Mountain Summit", "NYE Dinner"] },
             { day: 7, date: "1st Jan 2026", title: "New Year's Hike & Views", location: "Tatra National Park", hotel: "Pokoje Goscinne U Moniki", travelTime: "Palenica Parking (30m)", notes: "The walk to Morskie Oko is approx. 2 hours each way.", activities: ["Hike to Morskie Oko (Glacial Lake)", "Optional: Horse-drawn sleigh ride", "Gubałówka Mountain (Funicular)", "Snow tubing & panorama views"], highlights: ["Glacial Lake", "Gubałówka Sunset"] },
@@ -256,10 +256,11 @@
                 mobileHeaderDay.innerText = `Day ${currentDay} of 11`;
                 mobileHeaderTitle.innerText = data.date;
 
-                // Cover Image Block for Day 1
-                const coverImageHtml = currentDay === 1 ? `
+                // Cover Image Block for Days 1 and 2
+                const hasCover = [1, 2].includes(currentDay);
+                const coverImageHtml = hasCover ? `
                     <div class="relative h-96 md:h-[30rem] rounded-[2.5rem] overflow-hidden shadow-2xl mb-8 fade-in">
-                        <img src="pictures/cover1.jpg" class="absolute inset-0 w-full h-full object-cover" onerror="this.parentElement.style.display='none'">
+                        <img src="pictures/cover${currentDay}.jpg" class="absolute inset-0 w-full h-full object-cover" onerror="this.parentElement.style.display='none'">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
                     </div>
                 ` : '';
@@ -396,9 +397,9 @@
             const error = document.getElementById('media-error');
             
             let path;
-            // Custom override for Day 2 Stay to use cover1.jpg
-            if (folder === 'pictures' && day === 2) {
-                path = 'pictures/cover1.jpg';
+            // Custom override for Day 3 Stay to use pictures/hotel3.jpg
+            if (folder === 'pictures' && day === 3) {
+                path = 'pictures/hotel3.jpg';
             } else {
                 const prefix = folder === 'pictures' ? 'hotel' : 'map';
                 path = `${folder}/${prefix}${day}.jpg`;
