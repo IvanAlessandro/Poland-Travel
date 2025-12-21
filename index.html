@@ -184,7 +184,7 @@
             { day: 4, date: "29th Dec 2025", title: "Shopping & Krakow Old Town", location: "Sosnowiec & Krakow", hotel: "Hotel Convictus Cracovia", travelTime: "Krakow to Sosnowiec (1hr) and back", notes: "Outlet Opens @9 - Try to allocate 4-5hrs - NOTE: Krakow Christmas Market is best enjoyed in the evening.", activities: ["Sosnowiec Designer Village (Outlet)", "Wawel Royal Castle & Cathedral", "Main Market Square (Rynek Główny)", "Jewish Quarter exploration"], highlights: ["Designer Shopping", "Royal History"] },
             { day: 5, date: "30th Dec 2025", title: "Heading to the Mountains", location: "Zakopane", hotel: "Pokoje Goscinne U Moniki", travelTime: "Krakow to Zakopane (1h 30m)", notes: "Meet host for check-in at 14:00.", activities: ["Check-out @7", "Travel to Zakopane", "For Skiers Lessons at 10.30", "Krupówki Street (Shopping & Food)", "Thermal Baths (Chochołowskie Termy)", "CheckIn @Pokoje", "Enjoy Zakopane Christmas Market"], highlights: ["Highlander culture", "Thermal springs"] },
             { day: 6, date: "31st Dec 2025", title: "New Year's Eve on the Peaks", location: "Kasprowy Wierch", hotel: "Pokoje Goscinne U Moniki", travelTime: "Local Zakopane travel", notes: "NYE Dinner is at Stek Chalupa.", activities: ["Kasprowy Wierch or Gubalowka Mountains", "Skiing Lesson 2 @10", "High Tatra summit exploration", "New Year's Eve Dinner at Stek Chalupa", "NYE Celebration in Zakopane"], highlights: ["Mountain Summit", "NYE Dinner"] },
-            { day: 7, date: "1st Jan 2026", title: "New Year's Hike & Views", location: "Tatra National Park", hotel: "Pokoje Goscinne U Moniki", travelTime: "Palenica Parking (30m)", notes: "The walk to Morskie Oko is approx. 2 hours each way.", activities: ["Hike to Morskie Oko (Glacial Lake)", "Optional: Horse-drawn sleigh ride", "Gubałówka Mountain (Funicular)", "Snow tubing & panorama views"], highlights: ["Glacial Lake", "Gubałówka Sunset"] },
+            { day: 7, date: "1st Jan 2026", title: "New Year's Hike & Views", location: "Tatra National Park", hotel: "Pokoje Goscinne U Moniki", travelTime: "Morskie Oko Palenica Parking (30 min)", notes: "The Morskie Oko the Soul of the Tatras - start early at 7.30", activities: ["Hike to Morskie Oko (Glacial Lake)", "Optional: Horse-drawn sleigh ride", "Snow tubing & panorama views", "Zakopane Village Experience and Shopping"], highlights: ["Glacial Lake", "Panorama Views"] },
             { day: 8, date: "2nd Jan 2026", title: "Snow Mazes & Slovakia", location: "Zakopane & Slovakia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Zakopane to Slovakia (1h)", notes: "Check-in in Slovakia after 17:00.", activities: ["Snowlandia (Giant Snow Maze)", "Cross border into Slovakia", "Treetop Walk at Bachledova Valley", "Check-in at lake resort"], highlights: ["Snowlandia Maze", "Treetop Walk"] },
             { day: 9, date: "3rd Jan 2026", title: "High Altitudes & Aquaparks", location: "Lomnicky Peak & Tatralandia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Local Slovakia travel", notes: "Tatralandia is a massive indoor tropical park.", activities: ["Lomnicky Peak (Cable car to 2,634m)", "Tatralandia Tropical Paradise", "Evening wellness and saunas", "Relaxation at the lake resort"], highlights: ["Highest accessible peak", "Tropical Waterpark"] },
             { day: 10, date: "4th Jan 2026", title: "Ice Sculptures & Return", location: "Hrebienok & Krakow", hotel: "Hyatt Place Krakow", travelTime: "Slovakia to Krakow (2h)", notes: "The Ice Dome is built from 1,800 ice blocks.", activities: ["Tatra Ice Dome (Ice Cathedral)", "Zdiar Strednica (Photo Stop)", "Travel back to Krakow", "Check-in at Hyatt Place Krakow"], highlights: ["Ice Dome Architecture", "Belianske Tatras views"] },
@@ -342,16 +342,29 @@
                     </div>
                 ` : '';
 
-                // Extra NYE Button for Day 6
-                const nyeButtonHtml = currentDay === 6 ? `
-                    <div class="mt-6">
-                        <button onclick="viewMedia('pictures', 'doc6', 'pdf')" class="w-full flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
-                            <i data-lucide="sparkles" class="w-6 h-6 text-yellow-400 group-hover:animate-pulse"></i>
-                            <span class="text-lg font-black uppercase tracking-wider">New Year's Eve Info</span>
-                            <i data-lucide="chevron-right" class="w-5 h-5 opacity-40"></i>
-                        </button>
-                    </div>
-                ` : '';
+                // Extra Detail Buttons (Day 6: NYE, Day 7: Snow Activities)
+                let extraButtonHtml = '';
+                if (currentDay === 6) {
+                    extraButtonHtml = `
+                        <div class="mt-6">
+                            <button onclick="viewMedia('pictures', 'doc6', 'pdf')" class="w-full flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
+                                <i data-lucide="sparkles" class="w-6 h-6 text-yellow-400 group-hover:animate-pulse"></i>
+                                <span class="text-lg font-black uppercase tracking-wider">New Year's Eve Info</span>
+                                <i data-lucide="chevron-right" class="w-5 h-5 opacity-40"></i>
+                            </button>
+                        </div>
+                    `;
+                } else if (currentDay === 7) {
+                    extraButtonHtml = `
+                        <div class="mt-6">
+                            <button onclick="viewMedia('pictures', 'doc7', 'pdf')" class="w-full flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
+                                <i data-lucide="snowflake" class="w-6 h-6 text-blue-400 group-hover:animate-pulse"></i>
+                                <span class="text-lg font-black uppercase tracking-wider">Snow Activities</span>
+                                <i data-lucide="chevron-right" class="w-5 h-5 opacity-40"></i>
+                            </button>
+                        </div>
+                    `;
+                }
 
                 container.innerHTML = `
                     <div class="space-y-6 fade-in">
@@ -436,7 +449,7 @@
                                         `).join('')}
                                     </div>
                                 </section>
-                                ${nyeButtonHtml}
+                                ${extraButtonHtml}
                             </div>
                             <div class="lg:col-span-4 space-y-6">
                                 <div class="bg-blue-600 text-white p-8 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
@@ -497,7 +510,7 @@
             // Determine Path and Titles
             if (isPdf) {
                 path = `${folder}/${identifier}.pdf`;
-                title.innerText = identifier === 'doc6' ? "New Year's Eve" : (identifier === 'info1' ? "Congo Itinerary" : "Travel Guide");
+                title.innerText = identifier === 'doc6' ? "New Year's Eve" : (identifier === 'doc7' ? "Snow Activities" : (identifier === 'info1' ? "Congo Itinerary" : "Travel Guide"));
                 subtitle.innerText = "Trip Document Viewer";
                 
                 pdfContent.src = path;
