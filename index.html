@@ -186,7 +186,7 @@
             { day: 6, date: "31st Dec 2025", title: "New Year's Eve on the Peaks", location: "Kasprowy Wierch", hotel: "Pokoje Goscinne U Moniki", travelTime: "Local Zakopane travel", notes: "NYE Dinner is at Stek Chalupa.", activities: ["Kasprowy Wierch or Gubalowka Mountains", "Skiing Lesson 2 @10", "High Tatra summit exploration", "New Year's Eve Dinner at Stek Chalupa", "NYE Celebration in Zakopane"], highlights: ["Mountain Summit", "NYE Dinner"] },
             { day: 7, date: "1st Jan 2026", title: "New Year's Hike & Views", location: "Tatra National Park", hotel: "Pokoje Goscinne U Moniki", travelTime: "Morskie Oko Palenica Parking (30 min)", notes: "The Morskie Oko the Soul of the Tatras - start early at 7.30", activities: ["Hike to Morskie Oko (Glacial Lake)", "Optional: Horse-drawn sleigh ride", "Snow tubing & panorama views", "Zakopane Village Experience and Shopping"], highlights: ["Glacial Lake", "Panorama Views"] },
             { day: 8, date: "2nd Jan 2026", title: "Snow Mazes & Slovakia", location: "Zakopane & Slovakia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Zakopane to Slovakia (1h)", notes: "Check in Slovakia after 17:00 to call & Remember to Book Dinner, Wellness etc...", activities: ["Snowlandia (Giant Snow Maze)", "Cross border into Slovakia", "Treetop Walk at Bachledova Valley", "Check-in at lake resort"], highlights: ["Snowlandia Maze", "Treetop Walk"] },
-            { day: 9, date: "3rd Jan 2026", title: "High Altitudes & Aquaparks", location: "Lomnicky Peak & Tatralandia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Local Slovakia travel", notes: "Tatralandia is a massive indoor tropical park.", activities: ["Lomnicky Peak (Cable car to 2,634m)", "Tatralandia Tropical Paradise", "Evening wellness and saunas", "Relaxation at the lake resort"], highlights: ["Highest accessible peak", "Tropical Waterpark"] },
+            { day: 9, date: "3rd Jan 2026", title: "High Altitudes & Aquaparks", location: "Lomnicky Peak & Tatralandia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Local Slovakia travel", notes: "Tatralandia is a massive indoor tropical park.", activities: ["Lomnicky Peak (Cable car to 2,634m)", "Tatralandia Tropical Paradise", "Evening wellness and saunas", "Relaxation at the lake resort", "Slovakia Explorer Dog Sledging", "Chopok Chuti Mountain"], highlights: ["Highest accessible peak", "Tropical Waterpark"] },
             { day: 10, date: "4th Jan 2026", title: "Ice Sculptures & Return", location: "Hrebienok & Krakow", hotel: "Hyatt Place Krakow", travelTime: "Slovakia to Krakow (2h)", notes: "The Ice Dome is built from 1,800 ice blocks.", activities: ["Tatra Ice Dome (Ice Cathedral)", "Zdiar Strednica (Photo Stop)", "Travel back to Krakow", "Check-in at Hyatt Place Krakow"], highlights: ["Ice Dome Architecture", "Belianske Tatras views"] },
             { day: 11, date: "5th Jan 2026", title: "Final Walk & Departure", location: "Krakow Airport", hotel: "Check-out", travelTime: "Krakow to Airport (20m)", notes: "Ensure rental car is refuelled before return.", activities: ["Morning walk in Krakow City Centre", "Return rental car at Airport @ 12:30", "Departure Flight @ 15:25"], highlights: ["Souvenir shopping", "Homebound"] }
         ];
@@ -342,9 +342,19 @@
                     </div>
                 ` : '';
 
-                // Extra Detail Buttons (Day 6: NYE, Day 7: Snow Activities)
+                // Extra Detail Buttons (Day 2: Salt Mines, Day 6: NYE, Day 7: Snow Activities)
                 let extraButtonHtml = '';
-                if (currentDay === 6) {
+                if (currentDay === 2) {
+                    extraButtonHtml = `
+                        <div class="mt-6">
+                            <button onclick="viewMedia('pictures', 'doc2', 'pdf')" class="w-full flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
+                                <i data-lucide="ticket" class="w-6 h-6 text-yellow-400 group-hover:animate-pulse"></i>
+                                <span class="text-lg font-black uppercase tracking-wider">Tickets Salt Mines</span>
+                                <i data-lucide="chevron-right" class="w-5 h-5 opacity-40"></i>
+                            </button>
+                        </div>
+                    `;
+                } else if (currentDay === 6) {
                     extraButtonHtml = `
                         <div class="mt-6">
                             <button onclick="viewMedia('pictures', 'doc6', 'pdf')" class="w-full flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
@@ -511,6 +521,7 @@
             if (isPdf) {
                 path = `${folder}/${identifier}.pdf`;
                 const titles = {
+                    'doc2': 'Tickets Salt Mines',
                     'doc6': "New Year's Eve",
                     'doc7': 'Snow Activities',
                     'info1': 'Congo Itinerary',
