@@ -191,7 +191,54 @@
             { day: 11, date: "5th Jan 2026", title: "Final Walk & Departure", location: "Krakow Airport", hotel: "Check-out", travelTime: "Krakow to Airport (20m)", notes: "Ensure rental car is refuelled before return.", activities: ["Morning walk in Krakow City Centre", "Return rental car at Airport @ 12:30", "Departure Flight @ 15:25"], highlights: ["Souvenir shopping", "Homebound"] }
         ];
 
+        // Destination specific detail data
+        const DESTINATION_DETAILS = {
+            "7-1": {
+                name: "Morskie Oko",
+                gps: "49.2138° N, 20.0714° E",
+                gpsLink: "https://www.google.com/maps/search/49.2138,20.0714",
+                photo: "pictures/morskie_oko_detail.jpg",
+                details: `
+                    <p class="mb-4">Morskie Oko, meaning "Eye of the Sea", is the largest and arguably most beautiful lake in the Tatra Mountains. Situated at 1,395 metres above sea level, it is surrounded by the highest peaks in Poland.</p>
+                    
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Journey Begins: Palenica Białczańska</h4>
+                    <p class="mb-2">Your adventure starts at the <strong>Palenica Białczańska</strong> parking lot. This is the entry point to the Tatra National Park.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-4">
+                        <li><strong>Parking:</strong> Must be booked online in advance. It fills up extremely quickly, especially during the holidays.</li>
+                        <li><strong>Entrance Fee:</strong> A small entry fee to the National Park is required at the gate.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">2. The Trail to the Lake</h4>
+                    <p class="mb-2">The route to Morskie Oko is a <strong>9 km (approx. 5.6 miles)</strong> paved road. While paved, it is a constant incline.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-4">
+                        <li><strong>Walking:</strong> Takes about 2 to 2.5 hours at a steady pace. Follow the red trail markers.</li>
+                        <li><strong>Horse-drawn Carriages/Sleighs:</strong> Available for those who prefer not to walk the whole way. In winter, these are traditional sleighs. They take you to <strong>Polana Włosienica</strong>, from where it is a final 15-20 minute easy walk to the lake.</li>
+                        <li><strong>Wodogrzmoty Mickiewicza:</strong> Look out for these impressive waterfalls about 45 minutes into the walk.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">3. Arrival at Morskie Oko</h4>
+                    <p class="mb-2">Once you reach the lake, the view opens up to the High Tatras, including <strong>Rysy</strong>, the highest peak in Poland.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-4">
+                        <li><strong>Schronisko (Mountain Hut):</strong> There are two huts here. The "New" hut (built 1908) is the main one where you can buy traditional Polish food like Pierogi, Bigos, and hot tea with lemon.</li>
+                        <li><strong>Walk Around the Lake:</strong> There is a scenic trail that circles the entire lake. It takes about 50 minutes and offers incredible perspectives of the surrounding mountains.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">4. For the Adventurous: Czarny Staw pod Rysami</h4>
+                    <p class="mb-2">If you have energy left, follow the trail to <strong>Czarny Staw</strong> (Black Lake), located higher up. It is a steep 30-40 minute climb from the far side of Morskie Oko, but the view looking down at Morskie Oko from above is spectacular.</p>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Practical Tips & Safety</h4>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
+                        <p class="text-blue-700 text-sm font-bold">● Start Early: Aim to be at the parking lot by 7:30 or 8:00 AM.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Layer Up: It is significantly colder at the lake than in Zakopane. Wear thermal layers and bring a windproof jacket.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Footwear: Even though the road is paved, it can be icy in winter. Good hiking boots are essential.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Daylight: Remember that in December and January, it gets dark by 4:00 PM. Plan your return walk accordingly.</p>
+                    </div>
+                `
+            }
+        };
+
         let currentDay = 0;
+        let currentDestination = null;
 
         // Initialise App
         function init() {
@@ -231,14 +278,53 @@
             const mobileHeaderDay = document.getElementById('mobile-header-day');
             const mobileHeaderTitle = document.getElementById('mobile-header-title');
 
-            if (currentDay === 0) {
+            // --- Destination Detail View ---
+            if (currentDestination) {
+                const dest = DESTINATION_DETAILS[currentDestination];
+                mobileHeaderDay.innerText = "Destination";
+                mobileHeaderTitle.innerText = dest.name;
+
+                container.innerHTML = `
+                    <div class="space-y-6 fade-in pb-12">
+                        <button onclick="closeDestination()" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 transition-all active:scale-95 group">
+                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            <span class="text-xs font-bold uppercase tracking-widest">Back to Itinerary</span>
+                        </button>
+
+                        <div class="relative h-96 md:h-[35rem] rounded-[2.5rem] overflow-hidden shadow-2xl">
+                            <img src="${dest.photo}" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h2 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-none">${dest.name}</h2>
+                            <div class="flex items-center text-slate-500 font-bold bg-white p-4 rounded-2xl border border-slate-100 shadow-sm w-fit">
+                                <i data-lucide="map-pin" class="w-5 h-5 mr-2 text-red-500"></i>
+                                <span class="mr-4">GPS: ${dest.gps}</span>
+                                <a href="${dest.gpsLink}" target="_blank" class="bg-blue-600 text-white px-4 py-1.5 rounded-lg text-xs hover:bg-blue-700 transition-colors">Open Maps</a>
+                            </div>
+                        </div>
+
+                        <section class="bg-white rounded-[2.5rem] p-8 md:p-12 border border-slate-100 shadow-sm">
+                            <h3 class="text-2xl font-black text-slate-900 mb-6 flex items-center">
+                                <i data-lucide="file-text" class="w-6 h-6 mr-3 text-blue-600"></i>
+                                Visit Guide
+                            </h3>
+                            <div class="prose prose-slate max-w-none text-slate-600 font-medium leading-relaxed">
+                                ${dest.details}
+                            </div>
+                        </section>
+                    </div>
+                `;
+            } 
+            // --- Home Dashboard ---
+            else if (currentDay === 0) {
                 mobileHeaderDay.innerText = "Dashboard";
                 mobileHeaderTitle.innerText = "Welcome Home";
                 
                 container.innerHTML = `
                     <div class="space-y-8 fade-in">
                         <div class="relative h-96 md:h-[30rem] rounded-[2.5rem] overflow-hidden shadow-2xl flex items-end bg-blue-900">
-                            <!-- Ensure the home cover photo fits and is centered -->
                             <img src="pictures/home1.jpg" class="absolute inset-0 w-full h-full object-cover object-center z-0" alt="Home" onerror="this.style.display='none'">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/50 to-transparent z-10"></div>
                             <div class="absolute inset-0 flex items-center justify-center bg-pattern opacity-20 -z-10"></div>
@@ -282,106 +368,56 @@
                         </div>
                     </div>
                 `;
-            } else if (currentDay === 12) {
+            } 
+            // --- Trip Info ---
+            else if (currentDay === 12) {
                 mobileHeaderDay.innerText = "Information";
                 mobileHeaderTitle.innerText = "Guides & Trip Info";
                 
                 container.innerHTML = `
                     <div class="space-y-6 fade-in">
                         <div class="flex items-center justify-between mb-2">
-                             <button onclick="changeDay(0)" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 hover:border-blue-100 transition-all active:scale-95 group">
+                             <button onclick="changeDay(0)" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 transition-all active:scale-95 group">
                                 <i data-lucide="home" class="w-4 h-4"></i>
                                 <span class="text-xs font-bold uppercase tracking-widest">Home Dashboard</span>
                             </button>
                         </div>
-
-                        <div class="pb-2 border-b border-slate-200">
-                             <div class="flex items-center space-x-2 text-indigo-600 font-black uppercase tracking-[0.2em] text-[11px]">
-                                <span class="bg-indigo-100 px-2 py-0.5 rounded">Trip Info</span>
-                            </div>
-                            <h2 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-none">Guides & General Info</h2>
-                        </div>
-
+                        <h2 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-none">Guides & Info</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <button onclick="viewMedia('pictures', 'info1', 'pdf')" class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-xl transition-all text-center active:scale-[0.98] group">
-                                <div class="bg-blue-50 text-blue-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                                    <i data-lucide="file-text" class="w-10 h-10"></i>
+                            <button onclick="viewMedia('pictures', 'info1', 'pdf')" class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 transition-all group">
+                                <div class="bg-blue-50 text-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                    <i data-lucide="file-text"></i>
                                 </div>
-                                <h4 class="text-xl font-black text-slate-900">Itinerary by Congo</h4>
-                                <p class="text-slate-500 text-sm mt-2">Tap to view (PDF)</p>
-                            </button>
-
-                            <button onclick="viewMedia('pictures', 'info2', 'pdf')" class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-indigo-400 hover:shadow-xl transition-all text-center active:scale-[0.98] group">
-                                <div class="bg-indigo-50 text-indigo-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                                    <i data-lucide="book-open" class="w-10 h-10"></i>
-                                </div>
-                                <h4 class="text-xl font-black text-slate-900">Guide</h4>
-                                <p class="text-slate-500 text-sm mt-2">Tap to view (PDF)</p>
-                            </button>
-
-                            <button class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-emerald-400 hover:shadow-xl transition-all text-center active:scale-[0.98] group">
-                                <div class="bg-emerald-50 text-emerald-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                                    <i data-lucide="info" class="w-10 h-10"></i>
-                                </div>
-                                <h4 class="text-xl font-black text-slate-900">General Info</h4>
-                                <p class="text-slate-500 text-sm mt-2">Key trip details & contacts</p>
+                                <h4 class="font-bold">Itinerary PDF</h4>
                             </button>
                         </div>
                     </div>
                 `;
-            } else {
+            } 
+            // --- Daily Itinerary View ---
+            else {
                 const data = ITINERARY_DATA[currentDay - 1];
                 mobileHeaderDay.innerText = `Day ${currentDay} of 11`;
                 mobileHeaderTitle.innerText = data.date;
 
-                const hasCover = currentDay >= 1 && currentDay <= 11;
-                const coverImageHtml = hasCover ? `
-                    <div class="relative h-96 md:h-[30rem] rounded-[2.5rem] overflow-hidden shadow-2xl mb-8 fade-in">
-                        <!-- Ensure day section cover photos fit and are centered -->
-                        <img src="pictures/cover${currentDay}.jpg" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.parentElement.style.display='none'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                    </div>
-                ` : '';
-
-                let extraButtonHtml = '';
-                if (currentDay === 6) {
-                    extraButtonHtml = `
-                        <div class="mt-6">
-                            <button onclick="viewMedia('pictures', 'doc6', 'pdf')" class="w-full flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
-                                <i data-lucide="sparkles" class="w-6 h-6 text-yellow-400 group-hover:animate-pulse"></i>
-                                <span class="text-lg font-black uppercase tracking-wider text-center">New Year's Eve Info</span>
-                                <i data-lucide="chevron-right" class="w-5 h-5 opacity-40"></i>
-                            </button>
-                        </div>
-                    `;
-                } else if (currentDay === 7) {
-                    extraButtonHtml = `
-                        <div class="mt-6">
-                            <button onclick="viewMedia('pictures', 'doc7', 'pdf')" class="w-full flex items-center justify-center space-x-3 bg-slate-900 text-white p-6 rounded-[2.5rem] shadow-xl hover:bg-blue-900 transition-all active:scale-95 group">
-                                <i data-lucide="snowflake" class="w-6 h-6 text-blue-400 group-hover:animate-pulse"></i>
-                                <span class="text-lg font-black uppercase tracking-wider text-center">Snow Activities</span>
-                                <i data-lucide="chevron-right" class="w-5 h-5 opacity-40"></i>
-                            </button>
-                        </div>
-                    `;
-                }
-
                 container.innerHTML = `
                     <div class="space-y-6 fade-in">
                         <div class="flex items-center justify-between mb-2">
-                             <button onclick="changeDay(0)" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 hover:border-blue-100 transition-all active:scale-95 group">
+                             <button onclick="changeDay(0)" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 transition-all active:scale-95 group">
                                 <i data-lucide="home" class="w-4 h-4"></i>
                                 <span class="text-xs font-bold uppercase tracking-widest">Home Dashboard</span>
                             </button>
                         </div>
 
-                        ${coverImageHtml}
+                        <div class="relative h-96 md:h-[30rem] rounded-[2.5rem] overflow-hidden shadow-2xl mb-8">
+                            <img src="pictures/cover${currentDay}.jpg" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.parentElement.style.display='none'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                        </div>
                         
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-2 border-b border-slate-200">
                             <div>
                                 <div class="flex items-center space-x-2 text-blue-600 font-black uppercase tracking-[0.2em] text-[11px]">
                                     <span class="bg-blue-100 px-2 py-0.5 rounded">Day ${data.day}</span>
-                                    <span class="text-slate-300">•</span>
                                     <span>${data.date}</span>
                                 </div>
                                 <h2 class="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-none">${data.title}</h2>
@@ -390,101 +426,66 @@
                                     ${data.location}
                                 </div>
                             </div>
-                            <div class="hidden md:flex items-center bg-white p-2 rounded-2xl border border-slate-200 shadow-sm space-x-1">
-                                <button onclick="changeDay(${Math.max(1, currentDay - 1)})" ${currentDay === 1 ? 'disabled' : ''} class="p-3 hover:bg-slate-100 disabled:opacity-20 rounded-xl transition-colors">
-                                    <i data-lucide="chevron-left" class="w-6 h-6"></i>
-                                </button>
-                                <div class="px-6 flex flex-col items-center">
-                                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Progress</span>
-                                    <span class="font-bold text-slate-900">${currentDay} / 11</span>
-                                </div>
-                                <button onclick="changeDay(${Math.min(11, currentDay + 1)})" ${currentDay === 11 ? 'disabled' : ''} class="p-3 hover:bg-slate-100 disabled:opacity-20 rounded-xl transition-colors">
-                                    <i data-lucide="chevron-right" class="w-6 h-6"></i>
-                                </button>
-                            </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            <!-- Stay Card -->
-                            <button onclick="viewMedia('pictures', ${data.day})" class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-md transition-all text-left active:scale-[0.98]">
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-indigo-50 p-3 rounded-2xl text-indigo-600 flex-shrink-0"><i data-lucide="home"></i></div>
-                                    <div class="min-w-0">
-                                        <p class="text-[10px] font-black text-slate-400 uppercase truncate">Stay (Tap to view)</p>
-                                        <p class="font-bold text-slate-800 truncate">${data.hotel}</p>
-                                    </div>
-                                </div>
-                            </button>
-                            <!-- Est Travel Card -->
-                            <button onclick="viewMedia('maps', ${data.day})" class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-md transition-all text-left active:scale-[0.98]">
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-orange-50 p-3 rounded-2xl text-orange-600 flex-shrink-0"><i data-lucide="clock"></i></div>
-                                    <div class="min-w-0">
-                                        <p class="text-[10px] font-black text-slate-400 uppercase truncate">Est. Travel (Tap Map)</p>
-                                        <p class="font-bold text-slate-800 truncate">${data.travelTime}</p>
-                                    </div>
-                                </div>
-                            </button>
-                            <div class="bg-slate-900 p-6 rounded-3xl shadow-xl lg:col-span-1 sm:col-span-2">
-                                <div class="flex items-center space-x-3 text-blue-400 mb-2">
-                                    <i data-lucide="info" class="w-4 h-4"></i>
-                                    <span class="text-[10px] font-black uppercase tracking-[0.2em]">Note</span>
-                                </div>
+                            <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                                <p class="text-[10px] font-black text-slate-400 uppercase mb-1">Stay</p>
+                                <p class="font-bold text-slate-800">${data.hotel}</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                                <p class="text-[10px] font-black text-slate-400 uppercase mb-1">Est. Travel</p>
+                                <p class="font-bold text-slate-800">${data.travelTime}</p>
+                            </div>
+                            <div class="bg-slate-900 p-6 rounded-3xl shadow-xl">
                                 <p class="text-white text-sm font-medium leading-relaxed italic">"${data.notes}"</p>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                            <div class="lg:col-span-8 space-y-6">
-                                <section class="bg-white rounded-[2.5rem] p-6 md:p-10 border border-slate-100 shadow-sm">
-                                    <h3 class="text-2xl font-black text-slate-900 mb-8">Daily Actions</h3>
-                                    <div class="space-y-8 relative">
-                                        <div class="absolute left-[19px] top-2 bottom-2 w-px bg-slate-100 hidden sm:block"></div>
-                                        ${data.activities.map((act, i) => `
-                                            <div class="flex space-x-5 group relative z-10">
-                                                <div class="flex-none w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black text-sm">${i + 1}</div>
-                                                <div class="pt-1.5"><p class="text-slate-800 font-semibold md:text-lg">${act}</p></div>
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                </section>
-                                ${extraButtonHtml}
+                        <section class="bg-white rounded-[2.5rem] p-6 md:p-10 border border-slate-100 shadow-sm">
+                            <div class="flex items-center justify-between mb-8">
+                                <h3 class="text-2xl font-black text-slate-900">Daily Actions</h3>
+                                <p class="text-[10px] font-bold text-blue-500 uppercase tracking-widest">Click number for details</p>
                             </div>
-                            <div class="lg:col-span-4 space-y-6">
-                                <div class="bg-blue-600 text-white p-8 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
-                                    <div class="relative z-10">
-                                        <h4 class="text-xl font-black mb-4 uppercase tracking-wider">Highlights</h4>
-                                        <ul class="space-y-4">
-                                            ${data.highlights.map(h => `
-                                                <li class="flex items-center space-x-3">
-                                                    <i data-lucide="star" class="w-5 h-5 text-yellow-300 fill-yellow-300"></i>
-                                                    <span class="font-bold">${h}</span>
-                                                </li>
-                                            `).join('')}
-                                        </ul>
+                            <div class="space-y-8 relative">
+                                <div class="absolute left-[19px] top-2 bottom-2 w-px bg-slate-100 hidden sm:block"></div>
+                                ${data.activities.map((act, i) => {
+                                    const actionId = `${currentDay}-${i + 1}`;
+                                    const hasDetails = !!DESTINATION_DETAILS[actionId];
+                                    return `
+                                    <div class="flex space-x-5 group relative z-10">
+                                        <button 
+                                            onclick="${hasDetails ? `openDestination('${actionId}')` : ''}"
+                                            class="flex-none w-10 h-10 rounded-2xl ${hasDetails ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg' : 'bg-blue-50 text-blue-600'} flex items-center justify-center font-black text-sm transition-all active:scale-90"
+                                        >
+                                            ${i + 1}
+                                        </button>
+                                        <div class="pt-1.5">
+                                            <p class="text-slate-800 font-semibold md:text-lg">${act}</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm text-center">
-                                    <div class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="map-pin" class="w-8 h-8"></i></div>
-                                    <p class="text-slate-500 text-sm mb-4">Need help getting to ${data.location}?</p>
-                                    <a href="https://www.google.com/maps/search/${encodeURIComponent(data.location)}" target="_blank" class="block w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-sm active:scale-95 transition-all shadow-lg">Open Google Maps</a>
-                                </div>
+                                    `;
+                                }).join('')}
                             </div>
-                        </div>
-
-                        <!-- Mobile Footer Nav -->
-                        <div class="md:hidden flex items-center justify-between pt-8 gap-3">
-                            <button onclick="changeDay(${Math.max(1, currentDay - 1)})" ${currentDay === 1 ? 'disabled' : ''} class="flex-1 py-4 bg-white border border-slate-200 rounded-2xl flex items-center justify-center text-slate-700 font-bold disabled:opacity-30">
-                                <i data-lucide="chevron-left" class="w-5 h-5 mr-2"></i> Prev
-                            </button>
-                            <button onclick="changeDay(${Math.min(11, currentDay + 1)})" ${currentDay === 11 ? 'disabled' : ''} class="flex-1 py-4 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-black disabled:opacity-30 shadow-lg shadow-blue-200">
-                                Next <i data-lucide="chevron-right" class="w-5 h-5 ml-2"></i>
-                            </button>
-                        </div>
+                        </section>
                     </div>
                 `;
             }
             lucide.createIcons();
+        }
+
+        /**
+         * Destination Viewer Logic
+         */
+        function openDestination(id) {
+            currentDestination = id;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            renderContent();
+        }
+
+        function closeDestination() {
+            currentDestination = null;
+            renderContent();
         }
 
         function viewMedia(folder, identifier, format = 'jpg') {
@@ -504,27 +505,16 @@
 
             if (isPdf) {
                 path = `${folder}/${identifier}.pdf`;
-                const titles = {
-                    'doc6': "New Year's Eve",
-                    'doc7': 'Snow Activities',
-                    'info1': 'Congo Itinerary',
-                    'info2': 'Travel Guide'
-                };
-                title.innerText = titles[identifier] || "Trip Document Viewer";
+                const titles = { 'info1': 'Congo Itinerary', 'info2': 'Travel Guide' };
+                title.innerText = titles[identifier] || "Document Viewer";
                 subtitle.innerText = "Internal Viewer";
-                
                 pdfContent.src = path;
                 pdfContent.classList.remove('hidden');
             } else {
-                if (folder === 'pictures' && identifier === 3) {
-                    path = 'pictures/hotel3.jpg';
-                } else {
-                    const prefix = folder === 'pictures' ? 'hotel' : 'map';
-                    path = `${folder}/${prefix}${identifier}.jpg`;
-                }
-                title.innerText = folder === 'pictures' ? 'Accommodation View' : 'Route Map';
-                subtitle.innerText = `Itinerary Day ${identifier}`;
-                
+                const prefix = folder === 'pictures' ? 'hotel' : 'map';
+                path = `${folder}/${prefix}${identifier}.jpg`;
+                title.innerText = folder === 'pictures' ? 'Accommodation' : 'Route Map';
+                subtitle.innerText = `Day ${identifier}`;
                 imgContent.src = path;
                 imgContent.classList.remove('hidden');
                 imgContent.onerror = () => {
@@ -546,6 +536,7 @@
 
         function changeDay(day) {
             currentDay = day;
+            currentDestination = null; // Reset destination view when changing days
             renderContent();
             window.scrollTo(0, 0);
             updateSidebarUI(day);
