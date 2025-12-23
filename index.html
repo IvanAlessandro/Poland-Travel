@@ -179,7 +179,7 @@
     <script>
         const ITINERARY_DATA = [
             { day: 1, date: "26th Dec 2025", title: "Arrival in Krakow", location: "Krakow", hotel: "Hotel Vistula", travelTime: "25 mins from airport", notes: "Free parking available; Breakfast is an extra charge.", activities: ["Departure from Malta @ 19:00 (FR7142)", "Arrival at Krakow Airport @ 21:40", "Pick up rental car from airport", "Travel to Hotel Vistula"], highlights: ["First night in Poland", "Rental car collection"] },
-            { day: 2, date: "27th Dec 2025", title: "Salt Mines & Auschwitz", location: "Wieliczka & Oświęcim", hotel: "Hotel Vistula", travelTime: "Mines (30m), Auschwitz (1h 20m)", notes: "Mines booked @ 09:00. Auschwitz booked @ 13:50.", activities: ["Wieliczka Salt Mines (Booked)", "Travel to Auschwitz (1.2hrs)", "Auschwitz & Birkenau (Booked)", "Optional: Katowice Christmas Market"], highlights: ["UNESCO Salt Mine", "Holocaust Memorial"] },
+            { day: 2, date: "27th Dec 2025", title: "Salt Mines & Auschwitz", location: "Wieliczka & Oświęcim", hotel: "Hotel Vistula", travelTime: "Mines (30m), Auschwitz (1h 20m)", notes: "Mines booked @ 09:00. Auschwitz booked @ 13:50.", activities: ["Wieliczka Salt Mine", "Travel to Auschwitz (1.2hrs)", "Auschwitz & Birkenau (Booked)", "Optional: Katowice Christmas Market"], highlights: ["UNESCO Salt Mine", "Holocaust Memorial"] },
             { day: 3, date: "28th Dec 2025", title: "Papal History & Theme Park", location: "Wadowice & Zator", hotel: "Hotel Convictus Cracovia", travelTime: "Wadowice (1h 10m), Zator (30m)", notes: "Energylandia Winter Zone opens at 11:30.", activities: ["Check-out", "Wadowice: Pope John Paul II's Birthplace", "Try local Kremówka (Cream Cake)", "Energylandia Winter Zone", "Check-in at Hotel Convictus", "Krakow City Evening"], highlights: ["Papal heritage", "Energylandia Coasters"] },
             { day: 4, date: "29th Dec 2025", title: "Shopping & Krakow Old Town", location: "Sosnowiec & Krakow", hotel: "Hotel Convictus Cracovia", travelTime: "Krakow to Sosnowiec (1hr) and back", notes: "Outlet Opens @9 - Try to allocate 4-5hrs - NOTE: Krakow Christmas Market is best enjoyed in the evening.", activities: ["Sosnowiec Designer Village (Outlet)", "Wawel Royal Castle & Cathedral", "Main Market Square (Rynek Główny)", "Jewish Quarter exploration"], highlights: ["Designer Shopping", "Royal History"] },
             { day: 5, date: "30th Dec 2025", title: "Heading to Zakopane and Tatra Mountains", location: "Zakopane", hotel: "Pokoje Goscinne U Moniki", travelTime: "Krakow to Zakopane (1h 30m)", notes: "Meet host for check-in at 14:00.", activities: ["Check-out @7", "Travel to Zakopane", "For Skiers Lessons at 10.30", "Gubałówka Mountain", "Krupówki Street (Shopping & Food)", "Thermal Baths (Chochołowskie Termy)", "CheckIn @Pokoje", "Enjoy Zakopane Christmas Market"], highlights: ["Highlander culture", "Thermal springs"] },
@@ -199,17 +199,23 @@
                 gpsLink: "https://www.google.com/maps/search/49.9833,20.0500",
                 photo: "pictures/salt_mine_detail.jpg",
                 details: `
-                    <p class="mb-4">The Wieliczka Salt Mine is one of Poland’s most distinguished heritage sites, located approximately 10 km from Kraków. As a UNESCO World Heritage Site, it offers a unique combination of geological significance, engineering mastery, and cultural heritage.</p>
+                    <p class="mb-4">The Wieliczka Salt Mine is one of Poland’s most distinguished heritage sites, located approximately 10 km from Kraków. As a UNESCO World Heritage Site, it offers a unique combination of geological significance, engineering mastery, and cultural heritage. Its extensive subterranean network spans over 300 km of tunnels, with only a curated route accessible to visitors.</p>
+                    
                     <h4 class="font-bold text-slate-900 mt-6 mb-2">Key Highlights</h4>
                     <ul class="list-disc pl-5 space-y-2 mb-6">
-                        <li><strong>Historic Depth:</strong> Operational since the 13th century.</li>
-                        <li><strong>Artistry in Salt:</strong> The renowned Chapel of St Kinga, carved entirely from rock salt.</li>
-                        <li><strong>Health and Wellness:</strong> A microclimate noted for respiratory benefits.</li>
+                        <li><strong>Historic Depth:</strong> Operational since the 13th century, it stands among the world’s oldest salt mines still preserved in original condition.</li>
+                        <li><strong>Artistry in Salt:</strong> Visitors encounter chapels, sculptures, and chambers carved entirely from rock salt, including the renowned Chapel of St Kinga.</li>
+                        <li><strong>Health and Wellness:</strong> The mine’s microclimate is noted for its purity, providing therapeutic benefits, particularly for respiratory conditions.</li>
+                        <li><strong>Engineering Achievement:</strong> The underground lakes, timber structures, and reinforced shafts demonstrate centuries of refined mining techniques.</li>
                     </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Booked Tourist Route</h4>
+                    <p class="mb-4">A curated journey of approximately 3 km through key chambers, salt sculptures, and the chapel. This route is suitable for general visitors and provides a comprehensive overview of the mine's history.</p>
+
                     <h4 class="font-bold text-slate-900 mt-6 mb-2">What to Bring</h4>
                     <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
-                        <p class="text-blue-700 text-sm font-bold">● Wear comfortable shoes.</p>
-                        <p class="text-blue-700 text-sm font-bold">● Bring warm clothing (underground is 14°C - 16°C).</p>
+                        <p class="text-blue-700 text-sm font-bold">● Wear comfortable shoes suitable for walking.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Bring warm clothing: the underground temperature stays constant between 14°C and 16°C.</p>
                     </div>
                 `
             },
@@ -219,12 +225,35 @@
                 gpsLink: "https://www.google.com/maps/search/49.3068,19.9344",
                 photo: "pictures/gubalowka_detail.jpg",
                 details: `
-                    <p class="mb-4">Gubałówka offers a magnificent panoramic view of the Tatra Mountains and Zakopane.</p>
+                    <p class="mb-4">Gubałówka is one of the most popular destinations in Zakopane, offering a magnificent panoramic view of the Tatra Mountains and the town below.</p>
+                    
                     <h4 class="font-bold text-slate-900 mt-6 mb-2">1. Getting to the Summit</h4>
+                    <p class="mb-2">The most common way to reach the top is via the <strong>Gubałówka Funicular (PKL Gubałówka)</strong>. The station is located at the northern end of Krupówki Street.</p>
                     <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Funicular:</strong> Modern cable railway (3.5 mins).</li>
-                        <li><strong>Alternative:</strong> Hike up the marked trail (45 mins).</li>
+                        <li><strong>Funicular:</strong> A modern cable railway that whisks you to the top in just 3.5 minutes.</li>
+                        <li><strong>Tickets:</strong> Can be purchased at the lower station or online to skip the queues.</li>
+                        <li><strong>Alternative:</strong> You can also hike up the marked trail, which takes about 45 minutes to 1 hour.</li>
                     </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">2. Activities at the Top</h4>
+                    <p class="mb-2">Once at the 1,126-metre summit, there is plenty to see and do:</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-4">
+                        <li><strong>The Viewpoint:</strong> The main ridge provides a world-class view of the High Tatras, including Giewont (the "Sleeping Knight").</li>
+                        <li><strong>Highlander Market:</strong> A long row of stalls selling traditional Oscypek cheese, woollen slippers, and local crafts.</li>
+                        <li><strong>Gravity Slide:</strong> A summer toboggan run that often operates in winter if conditions allow.</li>
+                        <li><strong>Cafes and Restaurants:</strong> Many terraces offer "Górzalski" (highlander) tea and mulled wine with a view.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">3. Winter Highlights</h4>
+                    <ul class="list-disc pl-5 space-y-1 mb-4">
+                        <li><strong>Land of Light:</strong> During the Christmas period, the summit is decorated with thousands of beautiful light installations, making it perfect for evening visits.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Practical Tips</h4>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
+                        <p class="text-blue-700 text-sm font-bold">● Photography: The light for photos is best in the early morning or during the "golden hour" before sunset.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Shopping: This is a great place to buy Oscypek, but check that it's the real highlander sheep cheese!</p>
+                    </div>
                 `
             },
             "6-1": {
@@ -233,12 +262,30 @@
                 gpsLink: "https://www.google.com/maps/search/49.2322,19.9817",
                 photo: "pictures/kasprowy_detail.jpg",
                 details: `
-                    <p class="mb-4">Kasprowy Wierch (1,987m) is directly on the border between Poland and Slovakia.</p>
+                    <p class="mb-4">Kasprowy Wierch (1,987m) is the most famous mountain peak in Poland, known as the "Holy Mountain" for Polish skiers. It sits directly on the border between Poland and Slovakia.</p>
+                    
                     <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Cable Car Journey</h4>
+                    <p class="mb-2">The <strong>PKL Kasprowy Wierch Cable Car</strong> is an engineering marvel that takes you from Kuźnice (Zakopane) to almost the very summit.</p>
                     <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Booking:</strong> Book tickets online in advance to avoid 3-hour queues.</li>
-                        <li><strong>Duration:</strong> 12–15 minutes with a car change at Myślenickie Turnie.</li>
+                        <li><strong>Booking:</strong> Round-trip tickets should be booked online well in advance. Without a pre-booked ticket, wait times at Kuźnice can exceed 3 hours.</li>
+                        <li><strong>Transfer:</strong> The ride involves a change of cars at the Myślenickie Turnie middle station.</li>
+                        <li><strong>Duration:</strong> The entire ascent takes approximately 12–15 minutes.</li>
                     </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">2. At the Summit</h4>
+                    <p class="mb-2">Standing at nearly 2,000m, the views are unparalleled.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-4">
+                        <li><strong>Meteorological Observatory:</strong> The building at the peak is the highest situated building in Poland.</li>
+                        <li><strong>Walking the Ridge:</strong> You can take a short walk along the ridge path. Be mindful that you are crossing the border into Slovakia!</li>
+                        <li><strong>Dining with a View:</strong> The upper station house includes a restaurant and cafe with panoramic windows.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Practical Tips & Safety</h4>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
+                        <p class="text-blue-700 text-sm font-bold">● Time at Top: "Góra-Dół" tickets allow for 1 hour and 40 minutes at the summit before you must return.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Clothing: Temperatures are often 10–15°C lower than in Zakopane, with strong winds. Wear thermal layers!</p>
+                        <p class="text-blue-700 text-sm font-bold">● Minibuses: Private cars cannot enter Kuźnice. Take a local minibus from the Zakopane main station or the Rondo.</p>
+                    </div>
                 `
             },
             "7-1": {
@@ -247,12 +294,39 @@
                 gpsLink: "https://www.google.com/maps/search/49.2138,20.0714",
                 photo: "pictures/morskie_oko_detail.jpg",
                 details: `
-                    <p class="mb-4">Morskie Oko ("Eye of the Sea") is the largest lake in the Tatra Mountains.</p>
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Journey</h4>
+                    <p class="mb-4">Morskie Oko, meaning "Eye of the Sea", is the largest and arguably most beautiful lake in the Tatra Mountains. Situated at 1,395 metres above sea level, it is surrounded by the highest peaks in Poland.</p>
+                    
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Journey Begins: Palenica Białczańska</h4>
+                    <p class="mb-2">Your adventure starts at the <strong>Palenica Białczańska</strong> parking lot. This is the entry point to the Tatra National Park.</p>
                     <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Trail:</strong> 9 km paved road walk from Palenica Białczańska.</li>
-                        <li><strong>Horse-drawn Sleighs:</strong> Available in winter to Polana Włosienica.</li>
+                        <li><strong>Parking:</strong> Must be booked online in advance. It fills up extremely quickly, especially during the holidays.</li>
+                        <li><strong>Entrance Fee:</strong> A small entry fee to the National Park is required at the gate.</li>
                     </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">2. The Trail to the Lake</h4>
+                    <p class="mb-2">The route to Morskie Oko is a <strong>9 km (approx. 5.6 miles)</strong> paved road. While paved, it is a constant incline.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-4">
+                        <li><strong>Walking:</strong> Takes about 2 to 2.5 hours at a steady pace. Follow the red trail markers.</li>
+                        <li><strong>Horse-drawn Carriages/Sleighs:</strong> Available for those who prefer not to walk the whole way. In winter, these are traditional sleighs. They take you to <strong>Polana Włosienica</strong>, from where it is a final 15-20 minute easy walk to the lake.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">3. Arrival at Morskie Oko</h4>
+                    <p class="mb-2">Once you reach the lake, the view opens up to the High Tatras, including <strong>Rysy</strong>, the highest peak in Poland.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-4">
+                        <li><strong>Schronisko (Mountain Hut):</strong> There are two huts here. The "New" hut (built 1908) is the main one where you can buy traditional Polish food like Pierogi, Bigos, and hot tea with lemon.</li>
+                        <li><strong>Walk Around the Lake:</strong> There is a scenic trail that circles the entire lake. It takes about 50 minutes and offers incredible perspectives of the surrounding mountains.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">4. For the Adventurous: Czarny Staw pod Rysami</h4>
+                    <p class="mb-2">If you have energy left, follow the trail to <strong>Czarny Staw</strong> (Black Lake), located higher up. It is a steep 30-40 minute climb from the far side of Morskie Oko, but the view looking down at Morskie Oko from above is spectacular.</p>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Practical Tips & Safety</h4>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
+                        <p class="text-blue-700 text-sm font-bold">● Start Early: Aim to be at the parking lot by 7:30 or 8:00 AM.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Layer Up: It is significantly colder at the lake than in Zakopane. Wear thermal layers and bring a windproof jacket.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Footwear: Even though the road is paved, it can be icy in winter. Good hiking boots are essential.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Daylight: Remember that in December and January, it gets dark by 4:00 PM. Plan your return walk accordingly.</p>
+                    </div>
                 `
             },
             "9-1": {
@@ -261,12 +335,29 @@
                 gpsLink: "https://www.google.com/maps/search/49.1951,20.2131",
                 photo: "pictures/lomnicky_detail.jpg",
                 details: `
-                    <p class="mb-4">Lomnický štít (2,634m) is the second highest peak in the High Tatras.</p>
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Ascent</h4>
+                    <p class="mb-4">Lomnický štít is the second highest peak in the High Tatras (2,634m) and is one of the most remarkable locations in Slovakia. It offers views that stretch across the entire Tatra range and deep into the Slovakian countryside.</p>
+                    
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Journey: Tatranská Lomnica</h4>
+                    <p class="mb-2">The trip to the top involves a two-stage cable car journey starting from the base station in <strong>Tatranská Lomnica</strong>.</p>
                     <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Red Cable Car:</strong> Iconic suspended car from Skalnaté Pleso.</li>
-                        <li><strong>Stay:</strong> Tickets allow for 50 minutes at the summit.</li>
+                        <li><strong>First Stage:</strong> A gondola takes you from Tatranská Lomnica to <strong>Skalnaté Pleso</strong> (1,751m).</li>
+                        <li><strong>The Final Ascent:</strong> From Skalnaté Pleso, you transfer to the iconic <strong>red suspended cable car</strong>. This car has no towers between the two stations, hanging high above the valley for a thrilling ride.</li>
                     </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">2. The Summit Experience</h4>
+                    <p class="mb-2">At the top, you are above the clouds in a unique alpine environment.</p>
+                    <ul class="list-disc pl-5 space-y-1 mb-4">
+                        <li><strong>Stay Duration:</strong> To manage crowds, each ticket is for a specific time slot allowing <strong>50 minutes</strong> on the summit.</li>
+                        <li><strong>Café Dedo:</strong> Named "Grandpa" (as the peak was affectionately called), this is one of the most spectacular places for a coffee in Europe.</li>
+                        <li><strong>Observatory:</strong> The peak houses a meteorological station and an astronomical observatory.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Practical Tips & Booking</h4>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
+                        <p class="text-blue-700 text-sm font-bold">● Booking Essential: Tickets for the red cable car MUST be booked online (GOPASS) days or weeks in advance.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Weather Watch: The cable car to the peak is very sensitive to wind and will close if conditions are unsafe.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Winter Warmth: At 2,634m, it is extremely cold and windy. Full winter gear is required.</p>
+                    </div>
                 `
             }
         };
@@ -472,7 +563,7 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            <!-- Restore Interactive Stay Card -->
+                            <!-- Interactive Stay Card -->
                             <button onclick="viewMedia('pictures', ${data.day})" class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-md transition-all text-left active:scale-[0.98] group">
                                 <div class="flex items-center space-x-4">
                                     <div class="bg-indigo-50 p-3 rounded-2xl text-indigo-600 flex-shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
@@ -485,7 +576,7 @@
                                 </div>
                             </button>
 
-                            <!-- Restore Interactive Travel Map Card -->
+                            <!-- Interactive Travel Map Card -->
                             <button onclick="viewMedia('maps', ${data.day})" class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-md transition-all text-left active:scale-[0.98] group">
                                 <div class="flex items-center space-x-4">
                                     <div class="bg-orange-50 p-3 rounded-2xl text-orange-600 flex-shrink-0 group-hover:bg-orange-600 group-hover:text-white transition-colors">
