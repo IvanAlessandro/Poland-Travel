@@ -144,7 +144,7 @@
                 </div>
                 
                 <div class="p-6 border-t border-slate-100 text-center">
-                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-slate-300">Safe Travels & Happy New Year!</p>
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Safe Travels & Happy New Year!</p>
                 </div>
             </div>
         </aside>
@@ -184,8 +184,8 @@
             { day: 4, date: "29th Dec 2025", title: "Shopping & Krakow Old Town", location: "Sosnowiec & Krakow", hotel: "Hotel Convictus Cracovia", travelTime: "Krakow to Sosnowiec (1hr) and back", notes: "Outlet Opens @9 - Try to allocate 4-5hrs - NOTE: Krakow Christmas Market is best enjoyed in the evening.", activities: ["Sosnowiec Designer Village (Outlet)", "Wawel Royal Castle & Cathedral", "Main Market Square (Rynek Główny)", "Jewish Quarter exploration"], highlights: ["Designer Shopping", "Royal History"] },
             { day: 5, date: "30th Dec 2025", title: "Heading to Zakopane and Tatra Mountains", location: "Zakopane", hotel: "Pokoje Goscinne U Moniki", travelTime: "Krakow to Zakopane (1h 30m)", notes: "Meet host for check-in at 14:00.", activities: ["Check-out @7", "Travel to Zakopane", "For Skiers Lessons at 10.30", "Krupówki Street (Shopping & Food)", "Thermal Baths (Chochołowskie Termy)", "CheckIn @Pokoje", "Enjoy Zakopane Christmas Market"], highlights: ["Highlander culture", "Thermal springs"] },
             { day: 6, date: "31st Dec 2025", title: "New Year's Eve on the Peaks", location: "Kasprowy Wierch", hotel: "Pokoje Goscinne U Moniki", travelTime: "Local Zakopane travel", notes: "NYE Dinner is at Stek Chalupa.", activities: ["Kasprowy Wierch or Gubalowka Mountains", "Skiing Lesson 2 @10", "High Tatra summit exploration", "New Year's Eve Dinner at Stek Chalupa", "NYE Celebration in Zakopane"], highlights: ["Mountain Summit", "NYE Dinner"] },
-            { day: 7, date: "1st Jan 2026", title: "Morskie Oko New Years Eve Hike & View", location: "Tatra National Park", hotel: "Pokoje Goscinne U Moniki", travelTime: "Morskie Oko Palenica Parking (30 min)", notes: "The Morskie Oko the Soul of the Tatras - start early at 7.30", activities: ["Hike to Morskie Oko (Glacial Lake)", "Optional: Horse-drawn sleigh ride", "Snow tubing & panorama views", "Zakopane Village Experience and Shopping"], highlights: ["Glacial Lake", "Panorama Views"] },
-            { day: 8, date: "2nd Jan 2026", title: "Snow Mazes & Slovakia", location: "Zakopane & Slovakia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Zakopane to Slovakia (1h)", notes: "Check in Slovakia after 17:00 to call & Remember to Book Dinner, Wellness etc...", activities: ["Snowlandia (Giant Snow Maze)", "Cross border into Slovakia", "Treetop Walk at Bachledova Valley", "Check-in at lake resort"], highlights: ["Snowlandia Maze", "Treetop Walk"] },
+            { day: 7, date: "1st Jan 2026", title: "Morskie Oko New Year's Hike & View", location: "Tatra National Park", hotel: "Pokoje Goscinne U Moniki", travelTime: "Morskie Oko Palenica Parking (30 min)", notes: "Morskie Oko: The Soul of the Tatras - start early at 7:30.", activities: ["Hike to Morskie Oko (Glacial Lake)", "Optional: Horse-drawn sleigh ride", "Snow tubing & panorama views", "Zakopane Village Experience and Shopping"], highlights: ["Glacial Lake", "Panorama Views"] },
+            { day: 8, date: "2nd Jan 2026", title: "Snow Mazes & Slovakia", location: "Zakopane & Slovakia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Zakopane to Slovakia (1h)", notes: "Check in Slovakia after 17:00. Remember to book Dinner, Wellness etc.", activities: ["Snowlandia (Giant Snow Maze)", "Cross border into Slovakia", "Treetop Walk at Bachledova Valley", "Check-in at lake resort"], highlights: ["Snowlandia Maze", "Treetop Walk"] },
             { day: 9, date: "3rd Jan 2026", title: "Slovakia High Altitudes, Wellness and Parks", location: "Lomnicky Peak & Tatralandia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Local Slovakia travel", notes: "Tatralandia is a massive indoor tropical park.", activities: ["Lomnicky Peak (Cable car to 2,634m)", "Tatralandia Tropical Paradise", "Evening wellness and saunas", "Relaxation at the lake resort", "Slovakia Explorer Dog Sledging", "Chopok Chuti Mountain"], highlights: ["Highest accessible peak", "Tropical Waterpark"] },
             { day: 10, date: "4th Jan 2026", title: "Ice Sculptures & Return", location: "Hrebienok & Krakow", hotel: "Hyatt Place Krakow", travelTime: "Slovakia to Krakow (2h)", notes: "The Ice Dome is built from 1,800 ice blocks.", activities: ["Tatra Ice Dome (Ice Cathedral)", "Zdiar Strednica (Photo Stop)", "Travel back to Krakow", "Check-in at Hyatt Place Krakow"], highlights: ["Ice Dome Architecture", "Belianske Tatras views"] },
             { day: 11, date: "5th Jan 2026", title: "Final Walk & Departure", location: "Krakow Airport", hotel: "Check-out", travelTime: "Krakow to Airport (20m)", notes: "Ensure rental car is refuelled before return.", activities: ["Morning walk in Krakow City Centre", "Return rental car at Airport @ 12:30", "Departure Flight @ 15:25"], highlights: ["Souvenir shopping", "Homebound"] }
@@ -238,7 +238,8 @@
                 container.innerHTML = `
                     <div class="space-y-8 fade-in">
                         <div class="relative h-96 md:h-[30rem] rounded-[2.5rem] overflow-hidden shadow-2xl flex items-end bg-blue-900">
-                            <img src="pictures/home1.jpg" class="absolute inset-0 w-full h-full object-cover z-0" alt="Home" onerror="this.style.display='none'">
+                            <!-- Ensure the home cover photo fits and is centered -->
+                            <img src="pictures/home1.jpg" class="absolute inset-0 w-full h-full object-cover object-center z-0" alt="Home" onerror="this.style.display='none'">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/50 to-transparent z-10"></div>
                             <div class="absolute inset-0 flex items-center justify-center bg-pattern opacity-20 -z-10"></div>
                             <div class="p-8 md:p-12 relative z-20 w-full text-white">
@@ -282,7 +283,6 @@
                     </div>
                 `;
             } else if (currentDay === 12) {
-                // Trip Information Page (Page 12)
                 mobileHeaderDay.innerText = "Information";
                 mobileHeaderTitle.innerText = "Guides & Trip Info";
                 
@@ -334,16 +334,15 @@
                 mobileHeaderDay.innerText = `Day ${currentDay} of 11`;
                 mobileHeaderTitle.innerText = data.date;
 
-                // Cover Image Block for all itinerary days (1-11)
                 const hasCover = currentDay >= 1 && currentDay <= 11;
                 const coverImageHtml = hasCover ? `
                     <div class="relative h-96 md:h-[30rem] rounded-[2.5rem] overflow-hidden shadow-2xl mb-8 fade-in">
-                        <img src="pictures/cover${currentDay}.jpg" class="absolute inset-0 w-full h-full object-cover" onerror="this.parentElement.style.display='none'">
+                        <!-- Ensure day section cover photos fit and are centered -->
+                        <img src="pictures/cover${currentDay}.jpg" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.parentElement.style.display='none'">
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
                     </div>
                 ` : '';
 
-                // Extra Detail Buttons (Day 2: Salt Mines, Day 6: NYE, Day 7: Snow Activities)
                 let extraButtonHtml = '';
                 if (currentDay === 6) {
                     extraButtonHtml = `
@@ -369,7 +368,6 @@
 
                 container.innerHTML = `
                     <div class="space-y-6 fade-in">
-                        <!-- Navigation Home Button -->
                         <div class="flex items-center justify-between mb-2">
                              <button onclick="changeDay(0)" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-xl border border-slate-200 text-slate-500 hover:text-blue-600 hover:border-blue-100 transition-all active:scale-95 group">
                                 <i data-lucide="home" class="w-4 h-4"></i>
@@ -489,9 +487,6 @@
             lucide.createIcons();
         }
 
-        /**
-         * Media Viewer Logic
-         */
         function viewMedia(folder, identifier, format = 'jpg') {
             const viewer = document.getElementById('media-viewer');
             const imgContent = document.getElementById('media-content');
@@ -503,12 +498,10 @@
             let path;
             const isPdf = format === 'pdf';
 
-            // Reset UI
             imgContent.classList.add('hidden');
             pdfContent.classList.add('hidden');
             error.classList.add('hidden');
 
-            // Determine Path and Titles
             if (isPdf) {
                 path = `${folder}/${identifier}.pdf`;
                 const titles = {
@@ -547,13 +540,10 @@
 
         function closeMedia() {
             document.getElementById('media-viewer').classList.remove('active');
-            document.getElementById('pdf-content').src = ""; // Stop PDF from loading in background
+            document.getElementById('pdf-content').src = ""; 
             document.body.style.overflow = 'auto';
         }
 
-        /**
-         * Core Navigation Logic
-         */
         function changeDay(day) {
             currentDay = day;
             renderContent();
