@@ -186,32 +186,44 @@
             { day: 6, date: "31st Dec 2025", title: "New Year's Eve on the Peaks", location: "Kasprowy Wierch", hotel: "Pokoje Goscinne U Moniki", travelTime: "Local Zakopane travel", notes: "NYE Dinner is at Stek Chalupa.", activities: ["Kasprowy Wierch Cable Car", "Skiing Lesson 2 @10", "High Tatra summit exploration", "New Year's Eve Dinner at Stek Chalupa", "NYE Celebration in Zakopane"], highlights: ["Mountain Summit", "NYE Dinner"] },
             { day: 7, date: "1st Jan 2026", title: "Morskie Oko New Year's Hike & View", location: "Tatra National Park", hotel: "Pokoje Goscinne U Moniki", travelTime: "Morskie Oko Palenica Parking (30 min)", notes: "Morskie Oko: The Soul of the Tatras - start early at 7:30.", activities: ["Hike to Morskie Oko (Glacial Lake)", "Optional: Horse-drawn sleigh ride", "Snow tubing & panorama views", "Zakopane Village Experience and Shopping"], highlights: ["Glacial Lake", "Panorama Views"] },
             { day: 8, date: "2nd Jan 2026", title: "Snow Mazes & Slovakia", location: "Zakopane & Slovakia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Zakopane to Slovakia (1h)", notes: "Check in Slovakia after 17:00. Remember to book Dinner, Wellness etc.", activities: ["Snowlandia (Giant Snow Maze)", "Cross border into Slovakia", "Treetop Walk at Bachledova Valley", "Check-in at lake resort"], highlights: ["Snowlandia Maze", "Treetop Walk"] },
-            { day: 9, date: "3rd Jan 2026", title: "Slovakia High Altitudes, Wellness and Parks", location: "Lomnicky Peak & Tatralandia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Local Slovakia travel", notes: "Tatralandia is a massive indoor tropical park.", activities: ["Lomnicky Peak (Cable car to 2,634m)", "Tatralandia Tropical Paradise", "Evening wellness and saunas", "Relaxation at the lake resort", "Slovakia Explorer Dog Sledging", "Chopok Chuti Mountain"], highlights: ["Highest accessible peak", "Tropical Waterpark"] },
+            { day: 9, date: "3rd Jan 2026", title: "Slovakia High Altitudes, Wellness and Parks", location: "Lomnicky Peak & Tatralandia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Local Slovakia travel", notes: "Tatralandia is a massive indoor tropical park.", activities: ["Lomnicky Peak Cable Car", "Tatralandia Tropical Paradise", "Evening wellness and saunas", "Relaxation at the lake resort", "Slovakia Explorer Dog Sledging", "Chopok Chuti Mountain"], highlights: ["Highest accessible peak", "Tropical Waterpark"] },
             { day: 10, date: "4th Jan 2026", title: "Ice Sculptures & Return", location: "Hrebienok & Krakow", hotel: "Hyatt Place Krakow", travelTime: "Slovakia to Krakow (2h)", notes: "The Ice Dome is built from 1,800 ice blocks.", activities: ["Tatra Ice Dome (Ice Cathedral)", "Zdiar Strednica (Photo Stop)", "Travel back to Krakow", "Check-in at Hyatt Place Krakow"], highlights: ["Ice Dome Architecture", "Belianske Tatras views"] },
             { day: 11, date: "5th Jan 2026", title: "Final Walk & Departure", location: "Krakow Airport", hotel: "Check-out", travelTime: "Krakow to Airport (20m)", notes: "Ensure rental car is refuelled before return.", activities: ["Morning walk in Krakow City Centre", "Return rental car at Airport @ 12:30", "Departure Flight @ 15:25"], highlights: ["Souvenir shopping", "Homebound"] }
         ];
 
         // Destination specific detail data
         const DESTINATION_DETAILS = {
+            "2-1": {
+                name: "Wieliczka Salt Mine",
+                gps: "49.9833° N, 20.0500° E",
+                gpsLink: "https://www.google.com/maps/search/49.9833,20.0500",
+                photo: "pictures/salt_mine_detail.jpg",
+                details: `
+                    <p class="mb-4">The Wieliczka Salt Mine is one of Poland’s most distinguished heritage sites, located approximately 10 km from Kraków. As a UNESCO World Heritage Site, it offers a unique combination of geological significance, engineering mastery, and cultural heritage.</p>
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Key Highlights</h4>
+                    <ul class="list-disc pl-5 space-y-2 mb-6">
+                        <li><strong>Historic Depth:</strong> Operational since the 13th century.</li>
+                        <li><strong>Artistry in Salt:</strong> The renowned Chapel of St Kinga, carved entirely from rock salt.</li>
+                        <li><strong>Health and Wellness:</strong> A microclimate noted for respiratory benefits.</li>
+                    </ul>
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">What to Bring</h4>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
+                        <p class="text-blue-700 text-sm font-bold">● Wear comfortable shoes.</p>
+                        <p class="text-blue-700 text-sm font-bold">● Bring warm clothing (underground is 14°C - 16°C).</p>
+                    </div>
+                `
+            },
             "5-4": {
                 name: "Gubałówka Mountain",
                 gps: "49.3068° N, 19.9344° E",
                 gpsLink: "https://www.google.com/maps/search/49.3068,19.9344",
                 photo: "pictures/gubalowka_detail.jpg",
                 details: `
-                    <p class="mb-4">Gubałówka is one of the most popular destinations in Zakopane, offering a magnificent panoramic view of the Tatra Mountains and the town below.</p>
+                    <p class="mb-4">Gubałówka offers a magnificent panoramic view of the Tatra Mountains and Zakopane.</p>
                     <h4 class="font-bold text-slate-900 mt-6 mb-2">1. Getting to the Summit</h4>
-                    <p class="mb-2">The most common way to reach the top is via the <strong>Gubałówka Funicular</strong>. The station is located at the northern end of Krupówki Street.</p>
                     <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Funicular:</strong> A modern cable railway that whisks you to the top in just 3.5 minutes.</li>
-                        <li><strong>Tickets:</strong> Purchase at the lower station or online to skip the queues.</li>
-                        <li><strong>Alternative:</strong> Hike up the marked trail, taking about 45 minutes to 1 hour.</li>
-                    </ul>
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">2. Activities at the Top</h4>
-                    <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>The Viewpoint:</strong> The main ridge provides a world-class view of the High Tatras, including Giewont.</li>
-                        <li><strong>Highlander Market:</strong> Stalls selling traditional Oscypek cheese and woollen crafts.</li>
-                        <li><strong>Land of Light:</strong> At Christmas, the summit is decorated with thousands of beautiful light installations.</li>
+                        <li><strong>Funicular:</strong> Modern cable railway (3.5 mins).</li>
+                        <li><strong>Alternative:</strong> Hike up the marked trail (45 mins).</li>
                     </ul>
                 `
             },
@@ -221,30 +233,12 @@
                 gpsLink: "https://www.google.com/maps/search/49.2322,19.9817",
                 photo: "pictures/kasprowy_detail.jpg",
                 details: `
-                    <p class="mb-4">Kasprowy Wierch (1,987m) is the most famous mountain peak in Poland, known as the "Holy Mountain" for Polish skiers. It sits directly on the border between Poland and Slovakia.</p>
-                    
+                    <p class="mb-4">Kasprowy Wierch (1,987m) is directly on the border between Poland and Slovakia.</p>
                     <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Cable Car Journey</h4>
-                    <p class="mb-2">The <strong>PKL Kasprowy Wierch Cable Car</strong> is an engineering marvel that takes you from Kuźnice (Zakopane) to almost the very summit.</p>
                     <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Booking:</strong> Round-trip tickets should be booked online well in advance. Without a pre-booked ticket, wait times at Kuźnice can exceed 3 hours.</li>
-                        <li><strong>Transfer:</strong> The ride involves a change of cars at the Myślenickie Turnie middle station.</li>
-                        <li><strong>Duration:</strong> The entire ascent takes approximately 12–15 minutes.</li>
+                        <li><strong>Booking:</strong> Book tickets online in advance to avoid 3-hour queues.</li>
+                        <li><strong>Duration:</strong> 12–15 minutes with a car change at Myślenickie Turnie.</li>
                     </ul>
-
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">2. At the Summit</h4>
-                    <p class="mb-2">Standing at nearly 2,000m, the views are unparalleled.</p>
-                    <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Meteorological Observatory:</strong> The building at the peak is the highest situated building in Poland.</li>
-                        <li><strong>Walking the Ridge:</strong> You can take a short walk along the ridge path. Be mindful that you are crossing the border into Slovakia!</li>
-                        <li><strong>Dining with a View:</strong> The upper station house includes a restaurant and cafe with panoramic windows.</li>
-                    </ul>
-
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Practical Tips & Safety</h4>
-                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
-                        <p class="text-blue-700 text-sm font-bold">● Time at Top: "Góra-Dół" tickets allow for 1 hour and 40 minutes at the summit before you must return.</p>
-                        <p class="text-blue-700 text-sm font-bold">● Clothing: Temperatures are often 10–15°C lower than in Zakopane, with strong winds. Wear thermal layers!</p>
-                        <p class="text-blue-700 text-sm font-bold">● Minibuses: Private cars cannot enter Kuźnice. Take a local minibus from the Zakopane main station or the Rondo.</p>
-                    </div>
                 `
             },
             "7-1": {
@@ -253,40 +247,26 @@
                 gpsLink: "https://www.google.com/maps/search/49.2138,20.0714",
                 photo: "pictures/morskie_oko_detail.jpg",
                 details: `
-                    <p class="mb-4">Morskie Oko, meaning "Eye of the Sea", is the largest and arguably most beautiful lake in the Tatra Mountains. Situated at 1,395 metres above sea level, it is surrounded by the highest peaks in Poland.</p>
-                    
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Journey Begins: Palenica Białczańska</h4>
-                    <p class="mb-2">Your adventure starts at the <strong>Palenica Białczańska</strong> parking lot. This is the entry point to the Tatra National Park.</p>
+                    <p class="mb-4">Morskie Oko ("Eye of the Sea") is the largest lake in the Tatra Mountains.</p>
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Journey</h4>
                     <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Parking:</strong> Must be booked online in advance. It fills up extremely quickly, especially during the holidays.</li>
-                        <li><strong>Entrance Fee:</strong> A small entry fee to the National Park is required at the gate.</li>
+                        <li><strong>Trail:</strong> 9 km paved road walk from Palenica Białczańska.</li>
+                        <li><strong>Horse-drawn Sleighs:</strong> Available in winter to Polana Włosienica.</li>
                     </ul>
-
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">2. The Trail to the Lake</h4>
-                    <p class="mb-2">The route to Morskie Oko is a <strong>9 km (approx. 5.6 miles)</strong> paved road. While paved, it is a constant incline.</p>
+                `
+            },
+            "9-1": {
+                name: "Lomnicky Peak",
+                gps: "49.1951° N, 20.2131° E",
+                gpsLink: "https://www.google.com/maps/search/49.1951,20.2131",
+                photo: "pictures/lomnicky_detail.jpg",
+                details: `
+                    <p class="mb-4">Lomnický štít (2,634m) is the second highest peak in the High Tatras.</p>
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Ascent</h4>
                     <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Walking:</strong> Takes about 2 to 2.5 hours at a steady pace. Follow the red trail markers.</li>
-                        <li><strong>Horse-drawn Carriages/Sleighs:</strong> Available for those who prefer not to walk the whole way. In winter, these are traditional sleighs. They take you to <strong>Polana Włosienica</strong>, from where it is a final 15-20 minute easy walk to the lake.</li>
-                        <li><strong>Wodogrzmoty Mickiewicza:</strong> Look out for these impressive waterfalls about 45 minutes into the walk.</li>
+                        <li><strong>Red Cable Car:</strong> Iconic suspended car from Skalnaté Pleso.</li>
+                        <li><strong>Stay:</strong> Tickets allow for 50 minutes at the summit.</li>
                     </ul>
-
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">3. Arrival at Morskie Oko</h4>
-                    <p class="mb-2">Once you reach the lake, the view opens up to the High Tatras, including <strong>Rysy</strong>, the highest peak in Poland.</p>
-                    <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Schronisko (Mountain Hut):</strong> There are two huts here. The "New" hut (built 1908) is the main one where you can buy traditional Polish food like Pierogi, Bigos, and hot tea with lemon.</li>
-                        <li><strong>Walk Around the Lake:</strong> There is a scenic trail that circles the entire lake. It takes about 50 minutes and offers incredible perspectives of the surrounding mountains.</li>
-                    </ul>
-
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">4. For the Adventurous: Czarny Staw pod Rysami</h4>
-                    <p class="mb-2">If you have energy left, follow the trail to <strong>Czarny Staw</strong> (Black Lake), located higher up. It is a steep 30-40 minute climb from the far side of Morskie Oko, but the view looking down at Morskie Oko from above is spectacular.</p>
-
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Practical Tips & Safety</h4>
-                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
-                        <p class="text-blue-700 text-sm font-bold">● Start Early: Aim to be at the parking lot by 7:30 or 8:00 AM.</p>
-                        <p class="text-blue-700 text-sm font-bold">● Layer Up: It is significantly colder at the lake than in Zakopane. Wear thermal layers and bring a windproof jacket.</p>
-                        <p class="text-blue-700 text-sm font-bold">● Footwear: Even though the road is paved, it can be icy in winter. Good hiking boots are essential.</p>
-                        <p class="text-blue-700 text-sm font-bold">● Daylight: Remember that in December and January, it gets dark by 4:00 PM. Plan your return walk accordingly.</p>
-                    </div>
                 `
             }
         };
@@ -378,8 +358,9 @@
                 
                 container.innerHTML = `
                     <div class="space-y-8 fade-in">
+                        <!-- Top Picture Slot: pictures/home1.jpg -->
                         <div class="relative h-96 md:h-[30rem] rounded-[2.5rem] overflow-hidden shadow-2xl flex items-end bg-blue-900">
-                            <img src="pictures/home1.jpg" class="absolute inset-0 w-full h-full object-cover object-center z-0" alt="Home" onerror="this.style.display='none'">
+                            <img src="pictures/home1.jpg" class="absolute inset-0 w-full h-full object-cover object-center z-0" alt="Home" onerror="this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200'">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/50 to-transparent z-10"></div>
                             <div class="absolute inset-0 flex items-center justify-center bg-pattern opacity-20 -z-10"></div>
                             <div class="p-8 md:p-12 relative z-20 w-full text-white">
@@ -444,6 +425,14 @@
                                 </div>
                                 <h4 class="font-bold">Itinerary PDF</h4>
                             </button>
+
+                            <!-- GPS Details Button -->
+                            <button onclick="viewMedia('pictures', 'info2', 'pdf')" class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-indigo-400 transition-all group">
+                                <div class="bg-indigo-50 text-indigo-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                                    <i data-lucide="map-pin"></i>
+                                </div>
+                                <h4 class="font-bold">GPS Details</h4>
+                            </button>
                         </div>
                     </div>
                 `;
@@ -483,15 +472,37 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
-                                <p class="text-[10px] font-black text-slate-400 uppercase mb-1">Stay</p>
-                                <p class="font-bold text-slate-800">${data.hotel}</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
-                                <p class="text-[10px] font-black text-slate-400 uppercase mb-1">Est. Travel</p>
-                                <p class="font-bold text-slate-800">${data.travelTime}</p>
-                            </div>
+                            <!-- Restore Interactive Stay Card -->
+                            <button onclick="viewMedia('pictures', ${data.day})" class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-md transition-all text-left active:scale-[0.98] group">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-indigo-50 p-3 rounded-2xl text-indigo-600 flex-shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                                        <i data-lucide="home"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p class="text-[10px] font-black text-slate-400 uppercase truncate">Stay (Tap to view)</p>
+                                        <p class="font-bold text-slate-800 truncate">${data.hotel}</p>
+                                    </div>
+                                </div>
+                            </button>
+
+                            <!-- Restore Interactive Travel Map Card -->
+                            <button onclick="viewMedia('maps', ${data.day})" class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-md transition-all text-left active:scale-[0.98] group">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-orange-50 p-3 rounded-2xl text-orange-600 flex-shrink-0 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                                        <i data-lucide="map"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p class="text-[10px] font-black text-slate-400 uppercase truncate">Est. Travel (Tap Map)</p>
+                                        <p class="font-bold text-slate-800 truncate">${data.travelTime}</p>
+                                    </div>
+                                </div>
+                            </button>
+
                             <div class="bg-slate-900 p-6 rounded-3xl shadow-xl">
+                                <div class="flex items-center space-x-2 text-blue-400 mb-1">
+                                    <i data-lucide="info" class="w-3 h-3"></i>
+                                    <p class="text-[10px] font-black uppercase">Note</p>
+                                </div>
                                 <p class="text-white text-sm font-medium leading-relaxed italic">"${data.notes}"</p>
                             </div>
                         </div>
@@ -559,7 +570,7 @@
 
             if (isPdf) {
                 path = `${folder}/${identifier}.pdf`;
-                const titles = { 'info1': 'Congo Itinerary', 'info2': 'Travel Guide' };
+                const titles = { 'info1': 'Congo Itinerary', 'info2': 'GPS Details' };
                 title.innerText = titles[identifier] || "Document Viewer";
                 subtitle.innerText = "Internal Viewer";
                 pdfContent.src = path;
@@ -567,7 +578,7 @@
             } else {
                 const prefix = folder === 'pictures' ? 'hotel' : 'map';
                 path = `${folder}/${prefix}${identifier}.jpg`;
-                title.innerText = folder === 'pictures' ? 'Accommodation' : 'Route Map';
+                title.innerText = folder === 'pictures' ? 'Accommodation View' : 'Route Map';
                 subtitle.innerText = `Day ${identifier}`;
                 imgContent.src = path;
                 imgContent.classList.remove('hidden');
