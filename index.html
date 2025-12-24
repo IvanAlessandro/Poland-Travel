@@ -41,6 +41,17 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Slow Zoom Animation (Ken Burns Effect) */
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .animate-ken-burns {
+            animation: slowZoom 40s ease-in-out infinite;
+        }
+
         .bg-pattern {
             background-image: radial-gradient(#3b82f6 0.5px, transparent 0.5px);
             background-size: 24px 24px;
@@ -449,9 +460,9 @@
                 
                 container.innerHTML = `
                     <div class="space-y-8 fade-in">
-                        <!-- Top Picture Slot: pictures/home1.jpg -->
                         <div class="relative h-96 md:h-[30rem] rounded-[2.5rem] overflow-hidden shadow-2xl flex items-end bg-blue-900">
-                            <img src="pictures/home1.jpg" class="absolute inset-0 w-full h-full object-cover object-center z-0" alt="Home" onerror="this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200'">
+                            <!-- home1.jpg with Slow Ken Burns Zoom Effect -->
+                            <img src="pictures/home1.jpg" class="absolute inset-0 w-full h-full object-cover object-center z-0 animate-ken-burns" alt="Home" onerror="this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200'">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/50 to-transparent z-10"></div>
                             <div class="absolute inset-0 flex items-center justify-center bg-pattern opacity-20 -z-10"></div>
                             <div class="p-8 md:p-12 relative z-20 w-full text-white">
@@ -476,8 +487,21 @@
                         <div>
                             <h3 class="text-2xl font-black text-slate-900 mb-6">Explore Itinerary</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                ${ITINERARY_DATA.map(item => `
-                                    <button onclick="changeDay(${item.day})" class="group flex items-center justify-between bg-white p-5 rounded-2xl border border-slate-100 hover:border-blue-400 hover:shadow-xl transition-all text-left">
+                                ${ITINERARY_DATA.map(item => {
+                                    // Logic for light background colors based on groups
+                                    let groupColor = 'bg-white border-slate-100';
+                                    if ([1, 2, 3, 4, 11].includes(item.day)) {
+                                        groupColor = 'bg-red-50 border-red-100';
+                                    } else if ([5, 6, 7].includes(item.day)) {
+                                        groupColor = 'bg-blue-50 border-blue-100';
+                                    } else if (item.day === 8) {
+                                        groupColor = 'bg-green-50 border-green-100';
+                                    } else if ([9, 10].includes(item.day)) {
+                                        groupColor = 'bg-yellow-50 border-yellow-100';
+                                    }
+
+                                    return `
+                                    <button onclick="changeDay(${item.day})" class="group flex items-center justify-between ${groupColor} p-5 rounded-2xl border hover:border-blue-400 hover:shadow-xl transition-all text-left">
                                         <div class="flex items-center space-x-5 min-w-0 pr-4">
                                             <div class="text-2xl font-black text-slate-200 group-hover:text-blue-100 w-10 flex-shrink-0 text-center">${item.day.toString().padStart(2,'0')}</div>
                                             <div class="min-w-0">
@@ -485,11 +509,11 @@
                                                 <p class="text-[11px] font-bold text-slate-400 uppercase">${item.date}</p>
                                             </div>
                                         </div>
-                                        <div class="w-10 h-10 rounded-full bg-slate-50 group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center transition-all flex-shrink-0">
+                                        <div class="w-10 h-10 rounded-full bg-slate-50/50 group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center transition-all flex-shrink-0">
                                             <i data-lucide="chevron-right" class="w-5 h-5"></i>
                                         </div>
                                     </button>
-                                `).join('')}
+                                `;}).join('')}
                             </div>
                         </div>
                     </div>
@@ -661,7 +685,7 @@
 
             if (isPdf) {
                 path = `${folder}/${identifier}.pdf`;
-                const titles = { 'info1': 'Congo Itinerary', 'info2': 'GPS Details' };
+                const titles = { 'info1': 'Itinerary', 'info2': 'GPS Details' };
                 title.innerText = titles[identifier] || "Document Viewer";
                 subtitle.innerText = "Internal Viewer";
                 pdfContent.src = path;
