@@ -190,7 +190,7 @@
     <script>
         const ITINERARY_DATA = [
             { day: 1, date: "26th Dec 2025", title: "Arrival in Krakow", location: "Krakow", hotel: "Hotel Vistula", travelTime: "25 mins from airport", notes: "Free parking available; Breakfast is an extra charge.", activities: ["Departure from Malta @ 19:00 (FR7142)", "Arrival at Krakow Airport @ 21:40", "Pick up rental car from airport", "Travel to Hotel Vistula"], highlights: ["First night in Poland", "Rental car collection"] },
-            { day: 2, date: "27th Dec 2025", title: "Salt Mines & Auschwitz", location: "Wieliczka & Oświęcim", hotel: "Hotel Vistula", travelTime: "Mines (30m), Auschwitz (1h 20m)", notes: "Mines booked @ 09:00. Auschwitz booked @ 13:50.", activities: ["Wieliczka Salt Mine", "Travel to Auschwitz (1.2hrs)", "Auschwitz & Birkenau (Booked)", "Optional: Katowice Christmas Market"], highlights: ["UNESCO Salt Mine", "Holocaust Memorial"] },
+            { day: 2, date: "27th Dec 2025", title: "Salt Mines & Auschwitz", location: "Wieliczka & Oświęcim", hotel: "Hotel Vistula", travelTime: "Mines (30m), Auschwitz (1h 20m)", notes: "Mines booked @ 09:00. Auschwitz booked @ 13:50.", activities: ["Wieliczka Salt Mine", "Travel to Auschwitz (1.2hrs)", "Auschwitz & Birkenau (Booked)", "Optional: Katowice Christmas Market", "Kraków Christmas Market"], highlights: ["UNESCO Salt Mine", "Holocaust Memorial"] },
             { day: 3, date: "28th Dec 2025", title: "Papal History & Theme Park", location: "Wadowice & Zator", hotel: "Hotel Convictus Cracovia", travelTime: "Wadowice (1h 10m), Zator (30m)", notes: "Energylandia Winter Zone opens at 11:30.", activities: ["Check-out", "Wadowice: Pope John Paul II's Birthplace", "Try local Kremówka (Cream Cake)", "Energylandia Winter Zone", "Check-in at Hotel Convictus", "Krakow City Evening"], highlights: ["Papal heritage", "Energylandia Coasters"] },
             { day: 4, date: "29th Dec 2025", title: "Shopping & Krakow Old Town", location: "Sosnowiec & Krakow", hotel: "Hotel Convictus Cracovia", travelTime: "Krakow to Sosnowiec (1hr) and back", notes: "Outlet Opens @9 - Try to allocate 4-5hrs - NOTE: Krakow Christmas Market is best enjoyed in the evening.", activities: ["Sosnowiec Designer Village (Outlet)", "Wawel Royal Castle & Cathedral", "Main Market Square (Rynek Główny)", "Jewish Quarter exploration"], highlights: ["Designer Shopping", "Royal History"] },
             { day: 5, date: "30th Dec 2025", title: "Heading to Zakopane and Tatra Mountains", location: "Zakopane", hotel: "Pokoje Goscinne U Moniki", travelTime: "Krakow to Zakopane (1h 30m)", notes: "Meet host for check-in at 14:00.", activities: ["Check-out @7", "Travel to Zakopane", "For Skiers Lessons at 10.30", "Gubałówka Mountain", "Krupówki Street (Shopping & Food)", "Thermal Baths (Chochołowskie Termy)", "CheckIn @Pokoje", "Enjoy Zakopane Christmas Market"], highlights: ["Highlander culture", "Thermal springs"] },
@@ -198,7 +198,7 @@
             { day: 7, date: "1st Jan 2026", title: "Morskie Oko New Year's Hike & View", location: "Tatra National Park", hotel: "Pokoje Goscinne U Moniki", travelTime: "Morskie Oko Palenica Parking (30 min)", notes: "Morskie Oko: The Soul of the Tatras - start early at 7:30.", activities: ["Hike to Morskie Oko (Glacial Lake)", "Optional: Horse-drawn sleigh ride", "Snow tubing & panorama views", "Zakopane Village Experience and Shopping"], highlights: ["Glacial Lake", "Panorama Views"] },
             { day: 8, date: "2nd Jan 2026", title: "Snow Mazes & Slovakia", location: "Zakopane & Slovakia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Zakopane to Slovakia (1h)", notes: "Check in Slovakia after 17:00. Remember to book Dinner, Wellness etc.", activities: ["Snowlandia (Giant Snow Maze)", "Cross border into Slovakia", "Treetop Walk at Bachledova Valley", "Check-in at lake resort"], highlights: ["Snowlandia Maze", "Treetop Walk"] },
             { day: 9, date: "3rd Jan 2026", title: "Slovakia High Altitudes, Wellness and Parks", location: "Lomnicky Peak & Tatralandia", hotel: "Rezort Pri Jazere (Slovakia)", travelTime: "Local Slovakia travel", notes: "Tatralandia is a massive indoor tropical park.", activities: ["Lomnicky Peak Cable Car", "Tatralandia Tropical Paradise", "Evening wellness and saunas", "Relaxation at the lake resort", "Slovakia Explorer Dog Sledging", "Chopok Chuti Mountain", "Štrbské Pleso (Glacial Lake - Mountain)", "Ski resort Podbanské"], highlights: ["Highest accessible peak", "Tropical Waterpark"] },
-            { day: 10, date: "4th Jan 2026", title: "Ice Sculptures & Return", location: "Hrebienok & Krakow", hotel: "Hyatt Place Krakow", travelTime: "Slovakia to Krakow (2h)", notes: "The Ice Dome is built from 1,800 ice blocks.", activities: ["Tatra Ice Dome (Ice Cathedral)", "Zdiar Strednica (Photo Stop)", "Travel back to Krakow", "Check-in at Hyatt Place Krakow"], highlights: ["Ice Dome Architecture", "Belianske Tatras views"] },
+            { day: 10, date: "4th Jan 2026", title: "Ice Sculptures & Return", location: "Hrebienok & Krakow", hotel: "Hyatt Place Krakow", travelTime: "Slovakia to Krakow (2h)", notes: "The Ice Dome is built from 1,800 ice blocks.", activities: ["Checkout", "Tatra Ice Dome (Ice Cathedral)", "Zdiar Strednica (Photo Stop)", "Travel back to Krakow", "Check-in at Hyatt Place Krakow"], highlights: ["Ice Dome Architecture", "Belianske Tatras views"] },
             { day: 11, date: "5th Jan 2026", title: "Final Walk & Departure", location: "Krakow Airport", hotel: "Check-out", travelTime: "Krakow to Airport (20m)", notes: "Ensure rental car is refuelled before return.", activities: ["Morning walk in Krakow City Centre", "Return rental car at Airport @ 12:30", "Departure Flight @ 15:25"], highlights: ["Souvenir shopping", "Homebound"] }
         ];
 
@@ -227,6 +227,65 @@
                     <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
                         <p class="text-blue-700 text-sm font-bold">● Wear comfortable shoes suitable for walking.</p>
                         <p class="text-blue-700 text-sm font-bold">● Bring warm clothing: the underground temperature stays constant between 14°C and 16°C.</p>
+                    </div>
+                `
+            },
+            "2-5": {
+                name: "Kraków Christmas Market",
+                gps: "50.0617° N, 19.9373° E",
+                gpsLink: "https://www.google.com/maps/search/50.0617,19.9373",
+                photo: "pictures/subday2.5.jpg",
+                details: `
+                    <h4 class="font-bold text-slate-900 mb-2">Christmas Market</h4>
+                    <p class="mb-4">Kraków’s Christmas Market, centred on the Rynek Główny (Main Market Square), is one of Poland’s most distinguished festive events. The market blends historic surroundings with curated seasonal stalls, traditional crafts, and regional cuisine. The evening setting enhances ambience and provides optimal conditions for a relaxed yet structured introduction to the city.</p>
+                    
+                    <h4 class="font-bold text-slate-900 mt-6 mb-4">Key Stops</h4>
+                    
+                    <div class="space-y-6">
+                        <section>
+                            <h5 class="font-black text-blue-600 text-sm uppercase tracking-wide mb-2">A. St Mary’s Basilica (Exterior)</h5>
+                            <p class="mb-3">Commence with a brief orientation at the façade. The basilica’s illuminated towers and hourly trumpet call (Hejnał) provide immediate context and atmosphere.</p>
+                            <p class="mb-3">St Mary’s Basilica stands as one of Kraków’s most recognisable landmarks and a principal example of Polish Gothic architecture. Located on the northeast corner of the square, it has served as a civic and spiritual anchor since the 14th century.</p>
+                            <p class="mb-3">The basilica is best known for the <strong>Veit Stoss Altar</strong>, a late-Gothic masterpiece. A defining feature is the <strong>Hejnał Mariacki</strong>, a trumpet call performed every hour from the taller tower to commemorate a legendary medieval sentry.</p>
+                        </section>
+
+                        <section>
+                            <h5 class="font-black text-blue-600 text-sm uppercase tracking-wide mb-2">B. Cloth Hall (Sukiennice) Perimeter Walk</h5>
+                            <p>Proceed along the arcades surrounding the Cloth Hall. This offers direct exposure to the central square’s architecture and provides a clear visual map of the market layout.</p>
+                        </section>
+
+                        <section>
+                            <h5 class="font-black text-blue-600 text-sm uppercase tracking-wide mb-2">C. Main Christmas Market Zone</h5>
+                            <p class="mb-2">Navigate the central cluster of stalls. Focus areas include:</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Handcrafted ornaments from regional artisans</li>
+                                <li>Woodwork and traditional Silesian and Podhale crafts</li>
+                                <li>Local confectionery and gingerbread stands</li>
+                            </ul>
+                        </section>
+
+                        <section>
+                            <h5 class="font-black text-blue-600 text-sm uppercase tracking-wide mb-2">D. Culinary Sampling Points</h5>
+                            <p class="mb-2">Select concise, high-quality tastings:</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li><strong>Oscypek:</strong> Smoked highlander cheese with cranberry</li>
+                                <li>Pierogi or grilled Polish sausages</li>
+                                <li><strong>Grzaniec Galicyjski:</strong> Traditional mulled wine, a market signature</li>
+                            </ul>
+                        </section>
+
+                        <section>
+                            <h5 class="font-black text-blue-600 text-sm uppercase tracking-wide mb-2">E. Town Hall Tower Perspective</h5>
+                            <p>Position yourself near the Town Hall Tower to view the full market in its entirety. This vantage point enables unobstructed photographs and a clear understanding of the square’s scale.</p>
+                        </section>
+
+                        <section>
+                            <h5 class="font-black text-blue-600 text-sm uppercase tracking-wide mb-2">F. Optional Indoor Stops</h5>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li><strong>Café Noworolski:</strong> Heritage interior inside the Cloth Hall, suitable for a short break</li>
+                                <li><strong>Wierzynek Restaurant:</strong> For visitors seeking a premium historic dining option</li>
+                            </ul>
+                        </section>
                     </div>
                 `
             },
@@ -429,34 +488,26 @@
                     </div>
                 `
             },
-            "9-1": {
-                name: "Lomnicky Peak",
-                gps: "49.1951° N, 20.2131° E",
-                gpsLink: "https://www.google.com/maps/search/49.1951,20.2131",
-                photo: "pictures/lomnicky_detail.jpg",
+            "10-2": {
+                name: "Tatra Ice Dome & Hrebienok",
+                gps: "49.1585° N, 20.2248° E",
+                gpsLink: "https://www.google.com/maps/search/49.1585,20.2248",
+                photo: "pictures/subday10.2.jpg",
                 details: `
-                    <p class="mb-4">Lomnický štít is the second highest peak in the High Tatras (2,634m) and is one of the most remarkable locations in Slovakia. It offers views that stretch across the entire Tatra range and deep into the Slovakian countryside.</p>
+                    <h4 class="font-bold text-slate-900 mb-2">Hrebienok Resort & Starý Smokovec</h4>
+                    <p class="mb-4">Enjoy pleasant moments in the family-friendly Starý Smokovec resort. This area serves as a gateway to many hiking trails and winter activities in the High Tatras.</p>
                     
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">1. The Journey: Tatranská Lomnica</h4>
-                    <p class="mb-2">The trip to the top involves a two-stage cable car journey starting from the base station in <strong>Tatranská Lomnica</strong>.</p>
-                    <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>First Stage:</strong> A gondola takes you from Tatranská Lomnica to <strong>Skalnaté Pleso</strong> (1,751m).</li>
-                        <li><strong>The Final Ascent:</strong> From Skalnaté Pleso, you transfer to the iconic <strong>red suspended cable car</strong>. This car has no towers between the two stations, hanging high above the valley for a thrilling ride.</li>
+                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Key Highlights</h4>
+                    <ul class="list-disc pl-5 space-y-2 mb-6">
+                        <li><strong>Funicular Journey:</strong> Take the funicular from Starý Smokovec to Hrebienok, a popular tourist hub offering spectacular mountain vistas.</li>
+                        <li><strong>Tatra Temple of Ice:</strong> Visit the unique Tatra Ice Dome, a magnificent cathedral made entirely of ice. Each year, the architecture is inspired by a different famous world monument.</li>
+                        <li><strong>Ice Sculpture Gallery:</strong> Admire the gallery of ice sculptures, where artists showcase incredible temporary works of art.</li>
+                        <li><strong>Sledging Track:</strong> Have fun on the 2.5 km long sledging track that leads from Hrebienok back down to Starý Smokovec. It is often illuminated for night sledging.</li>
+                        <li><strong>Jakubkova lúka:</strong> A great spot to try some easy skiing or snowboarding, perfect for beginners and families.</li>
                     </ul>
 
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">2. The Summit Experience</h4>
-                    <p class="mb-2">At the top, you are above the clouds in a unique alpine environment.</p>
-                    <ul class="list-disc pl-5 space-y-1 mb-4">
-                        <li><strong>Stay Duration:</strong> To manage crowds, each ticket is for a specific time slot allowing <strong>50 minutes</strong> on the summit.</li>
-                        <li><strong>Café Dedo:</strong> Named "Grandpa" (as the peak was affectionately called), this is one of the most spectacular places for a coffee in Europe.</li>
-                        <li><strong>Observatory:</strong> The peak houses a meteorological station and an astronomical observatory.</li>
-                    </ul>
-
-                    <h4 class="font-bold text-slate-900 mt-6 mb-2">Practical Tips & Booking</h4>
-                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-2">
-                        <p class="text-blue-700 text-sm font-bold">● Booking Essential: Tickets for the red cable car MUST be booked online (GOPASS) days or weeks in advance.</p>
-                        <p class="text-blue-700 text-sm font-bold">● Weather Watch: The cable car to the peak is very sensitive to wind and will close if conditions are unsafe.</p>
-                        <p class="text-blue-700 text-sm font-bold">● Winter Warmth: At 2,634m, it is extremely cold and windy. Full winter gear is required.</p>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-xl">
+                        <p class="text-blue-700 text-sm font-bold italic">Note: The Ice Dome is maintained at a constant sub-zero temperature. Ensure you are wearing full winter gear when entering the structure.</p>
                     </div>
                 `
             }
@@ -550,6 +601,7 @@
                 container.innerHTML = `
                     <div class="space-y-8 fade-in">
                         <div class="relative h-96 md:h-[30rem] rounded-[2.5rem] overflow-hidden shadow-2xl flex items-end bg-blue-900">
+                            <!-- home1.jpg with Slow Ken Burns Zoom Effect -->
                             <img src="pictures/home1.jpg" class="absolute inset-0 w-full h-full object-cover object-center z-0 animate-ken-burns" alt="Home" onerror="this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200'">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/50 to-transparent z-10"></div>
                             <div class="absolute inset-0 flex items-center justify-center bg-pattern opacity-20 -z-10"></div>
@@ -576,6 +628,7 @@
                             <h3 class="text-2xl font-black text-slate-900 mb-6">Explore Itinerary</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 ${ITINERARY_DATA.map(item => {
+                                    // Logic for light background colors based on groups
                                     let groupColor = 'bg-white border-slate-100';
                                     if ([1, 2, 3, 4, 11].includes(item.day)) {
                                         groupColor = 'bg-red-50 border-red-100';
@@ -627,6 +680,8 @@
                                 </div>
                                 <h4 class="font-bold">Itinerary PDF</h4>
                             </button>
+
+                            <!-- GPS Details Button -->
                             <button onclick="viewMedia('pictures', 'info2', 'pdf')" class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:border-indigo-400 transition-all group">
                                 <div class="bg-indigo-50 text-indigo-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                                     <i data-lucide="map-pin"></i>
@@ -672,6 +727,7 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Interactive Stay Card -->
                             <button onclick="viewMedia('pictures', ${data.day})" class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-md transition-all text-left active:scale-[0.98] group">
                                 <div class="flex items-center space-x-4">
                                     <div class="bg-indigo-50 p-3 rounded-2xl text-indigo-600 flex-shrink-0 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
@@ -683,6 +739,8 @@
                                     </div>
                                 </div>
                             </button>
+
+                            <!-- Interactive Travel Map Card -->
                             <button onclick="viewMedia('maps', ${data.day})" class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm hover:border-blue-400 hover:shadow-md transition-all text-left active:scale-[0.98] group">
                                 <div class="flex items-center space-x-4">
                                     <div class="bg-orange-50 p-3 rounded-2xl text-orange-600 flex-shrink-0 group-hover:bg-orange-600 group-hover:text-white transition-colors">
@@ -694,6 +752,7 @@
                                     </div>
                                 </div>
                             </button>
+
                             <div class="bg-slate-900 p-6 rounded-3xl shadow-xl">
                                 <div class="flex items-center space-x-2 text-blue-400 mb-1">
                                     <i data-lucide="info" class="w-3 h-3"></i>
@@ -735,6 +794,9 @@
             lucide.createIcons();
         }
 
+        /**
+         * Destination Viewer Logic
+         */
         function openDestination(id) {
             currentDestination = id;
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -794,7 +856,7 @@
 
         function changeDay(day) {
             currentDay = day;
-            currentDestination = null;
+            currentDestination = null; // Reset destination view when changing days
             renderContent();
             window.scrollTo(0, 0);
             updateSidebarUI(day);
