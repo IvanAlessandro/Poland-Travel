@@ -786,6 +786,15 @@
                                     </div>
                                     `;
                                 }).join('')}
+                                
+                                ${currentDay === 6 ? `
+                                <div class="pt-4 border-t border-slate-50">
+                                    <button onclick="viewMedia('pictures', 'doc6', 'pdf')" class="w-full sm:w-auto flex items-center justify-center space-x-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-4 rounded-2xl transition-all active:scale-95 shadow-lg group">
+                                        <i data-lucide="utensils" class="w-5 h-5 text-blue-400 group-hover:scale-110 transition-transform"></i>
+                                        <span class="font-bold">Stek Chalupa</span>
+                                    </button>
+                                </div>
+                                ` : ''}
                             </div>
                         </section>
                     </div>
@@ -825,7 +834,7 @@
 
             if (isPdf) {
                 path = `${folder}/${identifier}.pdf`;
-                const titles = { 'info1': 'Itinerary', 'info2': 'GPS Details' };
+                const titles = { 'info1': 'Itinerary', 'info2': 'GPS Details', 'doc6': 'Stek Chalupa Menu' };
                 title.innerText = titles[identifier] || "Document Viewer";
                 subtitle.innerText = "Internal Viewer";
                 pdfContent.src = path;
